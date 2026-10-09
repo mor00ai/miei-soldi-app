@@ -12,7 +12,6 @@
   
   <link rel="manifest" href="manifest.json" />
   
-  <!-- Icone già pronte e inglobate nel codice (nessun file esterno necessario) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%231e3a8a'/%3E%3Cpath d='M 100 400 Q 250 350 400 150' stroke='%233b82f6' stroke-width='30' fill='none' stroke-linecap='round'/%3E%3Ctext x='256' y='380' font-size='260' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E€%3C/text%3E%3C/svg%3E" />
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%231e3a8a'/%3E%3Cpath d='M 100 400 Q 250 350 400 150' stroke='%233b82f6' stroke-width='30' fill='none' stroke-linecap='round'/%3E%3Ctext x='256' y='380' font-size='260' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E€%3C/text%3E%3C/svg%3E" />
   
@@ -358,12 +357,25 @@
       cursor: pointer;
     }
     .login-box .toggle-link a:hover { text-decoration: underline; }
+    .login-box .forgot-link {
+      text-align: center; margin-top: 12px; font-size: 0.85rem;
+    }
+    .login-box .forgot-link a {
+      color: var(--primary-light); text-decoration: none; cursor: pointer;
+    }
+    .login-box .forgot-link a:hover { text-decoration: underline; }
     .login-error {
       background: #fee2e2; color: var(--danger); padding: 10px;
       border-radius: 8px; margin-bottom: 16px; font-size: 0.9rem;
       display: none;
     }
     .login-error.show { display: block; }
+    .login-success {
+      background: #ecfdf5; color: var(--success); padding: 10px;
+      border-radius: 8px; margin-bottom: 16px; font-size: 0.9rem;
+      display: none;
+    }
+    .login-success.show { display: block; }
     
     @media (max-width: 600px) {
       .row { grid-template-columns: 1.5fr 1fr 1fr; }
@@ -383,6 +395,7 @@
       <p id="loginSubtitle">Accedi al tuo account</p>
       
       <div class="login-error" id="loginError"></div>
+      <div class="login-success" id="loginSuccess"></div>
       
       <div class="form-group">
         <label for="loginEmail">Email</label>
@@ -405,6 +418,27 @@
         <span id="toggleText">Non hai un account?</span>
         <a id="toggleLink" onclick="toggleLoginMode()">Registrati</a>
       </div>
+      
+      <div class="forgot-link">
+        <a onclick="showForgotPassword()">🔑 Password dimenticata?</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL RECUPERO PASSWORD -->
+  <div class="modal-overlay" id="forgotPasswordModal">
+    <div class="modal">
+      <h3 style="color: var(--primary);">🔑 Recupera password</h3>
+      <p>Inserisci la tua email. Riceverai un link per reimpostare la password.</p>
+      <div class="form-group">
+        <input type="email" id="forgotEmail" placeholder="tua@email.it" />
+      </div>
+      <div class="login-error" id="forgotError" style="margin-top: 10px;"></div>
+      <div class="login-success" id="forgotSuccess" style="margin-top: 10px;"></div>
+      <div class="modal-buttons">
+        <button class="btn secondary" onclick="hideModal('forgotPasswordModal')">Annulla</button>
+        <button class="btn accent" onclick="sendPasswordReset()">Invia link</button>
+      </div>
     </div>
   </div>
 
@@ -419,15 +453,15 @@
   </header>
 
   <nav>
-    <button class="active" data-tab="intro"> Inizio</button>
+    <button class="active" data-tab="intro">🏠 Inizio</button>
     <button data-tab="entrate">💰 Entrate</button>
     <button data-tab="spese">💸 Spese</button>
     <button data-tab="abbonamenti">📱 Abbonamenti</button>
     <button data-tab="riepilogo">📊 Riepilogo</button>
-    <button data-tab="analisi">🔍 Analisi</button>
+    <button data-tab="analisi"> Analisi</button>
     <button data-tab="azioni">✅ Azioni</button>
     <button data-tab="checklist">📋 Checklist</button>
-    <button data-tab="impostazioni">️ Impostazioni</button>
+    <button data-tab="impostazioni">⚙️ Impostazioni</button>
   </nav>
 
   <main>
@@ -582,7 +616,7 @@
         <div id="categoria-chart" class="bar-chart"></div>
       </div>
       <div class="card">
-        <h2> Confronto 50/30/20</h2>
+        <h2>🎯 Confronto 50/30/20</h2>
         <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 10px;">Riferimento generico: 50% bisogni, 30% desideri, 20% risparmio.</p>
         <div class="comparison">
           <div class="comparison-item">
@@ -630,7 +664,7 @@
           <div class="radio-group">
             <label>
               <input type="radio" name="export-period" value="mensile" checked />
-              <span> Mensile</span>
+              <span>📅 Mensile</span>
             </label>
             <label>
               <input type="radio" name="export-period" value="annuale" />
@@ -640,7 +674,7 @@
           <h3>2. Scegli il formato</h3>
           <div class="export-buttons">
             <button class="btn accent" onclick="exportHTML()">🌐 HTML</button>
-            <button class="btn secondary" onclick="exportTXT()"> TXT</button>
+            <button class="btn secondary" onclick="exportTXT()">📄 TXT</button>
             <button class="btn success" onclick="exportPDF()">📕 PDF</button>
           </div>
         </div>
@@ -649,7 +683,7 @@
 
     <section id="analisi" class="tab">
       <div class="card">
-        <h2>🔍 Dove finiscono davvero i tuoi soldi?</h2>
+        <h2> Dove finiscono davvero i tuoi soldi?</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Rispondi con sincerità: nessuno leggerà le tue risposte.</p>
         <div class="question">
           <label>Quale cifra mi ha sorpreso di più?</label>
@@ -722,7 +756,7 @@
 
     <section id="impostazioni" class="tab">
       <div class="card">
-        <h2>⚙️ Impostazioni</h2>
+        <h2>️ Impostazioni</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 16px;">Gestisci i tuoi dati, il cloud e le esportazioni.</p>
 
         <div class="cloud-section">
@@ -756,7 +790,7 @@
         <div class="radio-group">
           <label>
             <input type="radio" name="export-period-2" value="mensile" checked />
-            <span> Vista mensile</span>
+            <span>📅 Vista mensile</span>
           </label>
           <label>
             <input type="radio" name="export-period-2" value="annuale" />
@@ -774,12 +808,12 @@
         <div class="btn-row">
           <button class="btn secondary" onclick="exportJSON()">📤 Esporta JSON</button>
           <label class="btn secondary" style="cursor: pointer;">
-             Importa JSON
+            📥 Importa JSON
             <input type="file" accept=".json" onchange="importJSON(event)" style="display: none;" />
           </label>
         </div>
 
-        <h3 style="margin-top: 24px; color: var(--danger);">🗑️ Cancella dati</h3>
+        <h3 style="margin-top: 24px; color: var(--danger);">️ Cancella dati</h3>
         <div class="danger-box">
           <strong>Attenzione:</strong> queste azioni cancelleranno i tuoi dati. L'operazione non può essere annullata.
         </div>
@@ -790,15 +824,16 @@
 
         <h3 style="margin-top: 24px;">🚪 Account</h3>
         <div class="btn-row">
-          <button class="btn secondary" onclick="logout()"> Esci dall'account</button>
+          <button class="btn secondary" onclick="logout()">🚪 Esci dall'account</button>
         </div>
 
         <h3 style="margin-top: 24px;">ℹ️ Informazioni</h3>
         <div class="info-box">
           <strong>DOVE FINISCONO I MIEI SOLDI</strong><br>
-          Versione 1.3 (con autenticazione)<br>
-          Strumento educativo: non è consulenza finanziaria e non promette guadagni.<br><br>
-          I dati sono salvati sul tuo dispositivo (localStorage) e nel cloud (Firebase).
+          Versione 1.4 (con sicurezza avanzata)<br>
+          🔐 Sessione automatica: quando chiudi l'app, devi fare nuovamente il login.<br>
+          🔑 Recupero password disponibile nella schermata di accesso.<br><br>
+          Strumento educativo: non è consulenza finanziaria e non promette guadagni.
         </div>
       </div>
     </section>
@@ -838,7 +873,6 @@
 
   <script>
     // ============ FIREBASE CONFIG ============
-    // Le tue credenziali reali sono già inserite qui sotto!
     const firebaseConfig = {
       apiKey: "AIzaSyA9r7IvsQsS-8P7eaRwpQCrSN9RCXNynbk",
       authDomain: "miei-soldi-app.firebaseapp.com",
@@ -856,11 +890,29 @@
       firebaseApp = firebase.initializeApp(firebaseConfig);
       firebaseAuth = firebase.auth();
       firebaseDb = firebase.firestore();
-      initFirebaseAuth();
+      
+      // 🔐 SESSION PERSISTENCE: la sessione dura solo finché la tab è aperta
+      // Quando l'utente chiude la tab/browser, Firebase fa logout automatico
+      firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+          console.log('Persistenza SESSION attivata');
+          initFirebaseAuth();
+        })
+        .catch(err => {
+          console.error('Errore persistenza:', err);
+          initFirebaseAuth();
+        });
     } catch (err) {
       console.error('Firebase init error:', err);
       showLoginError('Errore Firebase: ' + err.message);
     }
+
+    //  Logout forzato quando l'utente chiude la pagina (backup sicurezza)
+    window.addEventListener('beforeunload', () => {
+      if (currentUser && firebaseAuth) {
+        firebaseAuth.signOut().catch(() => {});
+      }
+    });
 
     function initFirebaseAuth() {
       firebaseAuth.onAuthStateChanged((user) => {
@@ -873,6 +925,12 @@
         } else {
           currentUser = null;
           document.getElementById('loginScreen').classList.remove('hidden');
+          // Pulisci i campi login per sicurezza
+          document.getElementById('loginEmail').value = '';
+          document.getElementById('loginPassword').value = '';
+          document.getElementById('loginConfirmPassword').value = '';
+          document.getElementById('loginError').classList.remove('show');
+          document.getElementById('loginSuccess').classList.remove('show');
         }
       });
     }
@@ -885,8 +943,10 @@
       const toggleText = document.getElementById('toggleText');
       const toggleLink = document.getElementById('toggleLink');
       const error = document.getElementById('loginError');
+      const success = document.getElementById('loginSuccess');
       
       error.classList.remove('show');
+      success.classList.remove('show');
       
       if (isLoginMode) {
         subtitle.textContent = 'Accedi al tuo account';
@@ -907,6 +967,10 @@
       const email = document.getElementById('loginEmail').value.trim();
       const password = document.getElementById('loginPassword').value;
       const error = document.getElementById('loginError');
+      const success = document.getElementById('loginSuccess');
+      
+      error.classList.remove('show');
+      success.classList.remove('show');
       
       if (!email || !password) {
         showLoginError('Inserisci email e password');
@@ -925,8 +989,6 @@
         }
       }
       
-      error.classList.remove('show');
-      
       try {
         if (isLoginMode) {
           await firebaseAuth.signInWithEmailAndPassword(email, password);
@@ -941,18 +1003,66 @@
         else if (err.code === 'auth/email-already-in-use') message = 'Email già registrata';
         else if (err.code === 'auth/invalid-email') message = 'Email non valida';
         else if (err.code === 'auth/weak-password') message = 'Password troppo debole (min 6 caratteri)';
+        else if (err.code === 'auth/too-many-requests') message = 'Troppi tentativi. Riprova più tardi.';
         showLoginError(message);
       }
     }
 
     function showLoginError(message) {
       const error = document.getElementById('loginError');
+      const success = document.getElementById('loginSuccess');
+      success.classList.remove('show');
       error.textContent = message;
       error.classList.add('show');
     }
 
+    function showLoginSuccess(message) {
+      const success = document.getElementById('loginSuccess');
+      const error = document.getElementById('loginError');
+      error.classList.remove('show');
+      success.textContent = message;
+      success.classList.add('show');
+    }
+
+    // 🔑 RECUPERO PASSWORD
+    function showForgotPassword() {
+      document.getElementById('forgotEmail').value = document.getElementById('loginEmail').value;
+      document.getElementById('forgotError').classList.remove('show');
+      document.getElementById('forgotSuccess').classList.remove('show');
+      showModal('forgotPasswordModal');
+    }
+
+    async function sendPasswordReset() {
+      const email = document.getElementById('forgotEmail').value.trim();
+      const errorEl = document.getElementById('forgotError');
+      const successEl = document.getElementById('forgotSuccess');
+      
+      errorEl.classList.remove('show');
+      successEl.classList.remove('show');
+      
+      if (!email) {
+        errorEl.textContent = 'Inserisci la tua email';
+        errorEl.classList.add('show');
+        return;
+      }
+      
+      try {
+        await firebaseAuth.sendPasswordResetEmail(email);
+        successEl.textContent = '✅ Email inviata! Controlla la tua casella di posta (anche lo spam).';
+        successEl.classList.add('show');
+      } catch (err) {
+        console.error('Reset error:', err);
+        let message = 'Errore: ' + err.message;
+        if (err.code === 'auth/user-not-found') message = 'Nessun account trovato con questa email';
+        else if (err.code === 'auth/invalid-email') message = 'Email non valida';
+        else if (err.code === 'auth/too-many-requests') message = 'Troppi tentativi. Riprova più tardi.';
+        errorEl.textContent = message;
+        errorEl.classList.add('show');
+      }
+    }
+
     async function logout() {
-      if (confirm('Vuoi davvero uscire dall\'account?')) {
+      if (confirm('Vuoi davvero uscire dall\'account? Dovrai reinserire email e password al prossimo accesso.')) {
         await firebaseAuth.signOut();
         showToast('👋 Disconnesso', 'success');
       }
@@ -1021,7 +1131,6 @@
     // ============ PERSISTENZA ============
     function save() { 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      // Auto-save al cloud
       if (currentUser) {
         debounceSaveToCloud();
       }
