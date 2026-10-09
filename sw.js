@@ -1,17 +1,12 @@
-// ============================================
-// SERVICE WORKER - DOVE FINISCONO I MIEI SOLDI
-// Versione cache: aggiorna questo numero ogni volta che modifichi l'HTML
-// ============================================
-
-const CACHE_VERSION = 'v1.7';
+const CACHE_VERSION = 'v1.8';
 const CACHE_NAME = `dove-finiscono-soldi-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
-  './icon-mobile.svg',
-  './icon-pc.svg',
+  './icon-mobile.png',
+  './icon-pc.png',
   'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js',
   'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js',
@@ -23,10 +18,7 @@ self.addEventListener('install', (event) => {
   console.log('[SW] Installazione - Versione:', CACHE_VERSION);
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('[SW] Cache aperta:', CACHE_NAME);
-        return cache.addAll(ASSETS_TO_CACHE);
-      })
+      .then((cache) => cache.addAll(ASSETS_TO_CACHE))
       .then(() => self.skipWaiting())
   );
 });
@@ -49,11 +41,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
-  
-  if (event.request.url.includes('firebaseio.com') || 
-      event.request.url.includes('googleapis.com')) {
-    return;
-  }
+  if (event.request.url.includes('firebaseio.com') || event.request.url.includes('googleapis.com')) return;
 
   event.respondWith(
     caches.match(event.request)
@@ -63,30 +51,21 @@ self.addEventListener('fetch', (event) => {
             .then((networkResponse) => {
               if (networkResponse && networkResponse.status === 200) {
                 const responseClone = networkResponse.clone();
-                caches.open(CACHE_NAME).then((cache) => {
-                  cache.put(event.request, responseClone);
-                });
+                caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
               }
-            })
-            .catch(() => {});
-          
+            }).catch(() => {});
           return cachedResponse;
         }
-        
         return fetch(event.request)
           .then((networkResponse) => {
             if (networkResponse && networkResponse.status === 200) {
               const responseClone = networkResponse.clone();
-              caches.open(CACHE_NAME).then((cache) => {
-                cache.put(event.request, responseClone);
-              });
+              caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
             }
             return networkResponse;
           })
           .catch(() => {
-            if (event.request.destination === 'document') {
-              return caches.match('./index.html');
-            }
+            if (event.request.destination === 'document') return caches.match('./index.html');
           });
       })
   );
