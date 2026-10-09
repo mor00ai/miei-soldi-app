@@ -12,8 +12,9 @@
   
   <link rel="manifest" href="manifest.json" />
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%231e3a8a'/%3E%3Cpath d='M 100 400 Q 250 350 400 150' stroke='%233b82f6' stroke-width='30' fill='none' stroke-linecap='round'/%3E%3Ctext x='256' y='380' font-size='260' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E€%3C/text%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%231e3a8a'/%3E%3Cpath d='M 100 400 Q 250 350 400 150' stroke='%233b82f6' stroke-width='30' fill='none' stroke-linecap='round'/%3E%3Ctext x='256' y='380' font-size='260' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E€%3C/text%3E%3C/svg%3E" />
+  <!-- Icone esterne -->
+  <link rel="icon" type="image/svg+xml" href="icon-pc.svg" />
+  <link rel="apple-touch-icon" href="icon-mobile.svg" />
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
@@ -264,17 +265,20 @@
     .export-buttons {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px;
     }
-    /* 🔧 FIX: z-index dei modal portato a 20000 (sopra la login screen che è 9999) */
+    /* ✅ FIX: z-index altissimo per i modal */
     .modal-overlay {
       display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6); z-index: 20000;
+      background: rgba(0,0,0,0.7); z-index: 100000;
       align-items: center; justify-content: center; padding: 20px;
+      backdrop-filter: blur(4px);
     }
-    .modal-overlay.active { display: flex; }
+    .modal-overlay.active {
+      display: flex !important;
+    }
     .modal {
       background: white; border-radius: 12px; padding: 24px;
       max-width: 400px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-      z-index: 20001;
+      z-index: 100001;
     }
     .modal h3 { margin-bottom: 12px; font-size: 1.1rem; }
     .modal p { margin-bottom: 16px; font-size: 0.9rem; }
@@ -283,7 +287,7 @@
       position: fixed; bottom: 20px; left: 50%;
       transform: translateX(-50%) translateY(100px);
       background: var(--text); color: white; padding: 12px 20px;
-      border-radius: 8px; font-size: 0.9rem; z-index: 30000;
+      border-radius: 8px; font-size: 0.9rem; z-index: 100002;
       transition: transform 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
@@ -454,7 +458,7 @@
     <button data-tab="entrate">💰 Entrate</button>
     <button data-tab="spese">💸 Spese</button>
     <button data-tab="abbonamenti">📱 Abbonamenti</button>
-    <button data-tab="riepilogo">📊 Riepilogo</button>
+    <button data-tab="riepilogo"> Riepilogo</button>
     <button data-tab="analisi">🔍 Analisi</button>
     <button data-tab="azioni">✅ Azioni</button>
     <button data-tab="checklist">📋 Checklist</button>
@@ -655,7 +659,7 @@
         <div id="top-categorie"></div>
       </div>
       <div class="card">
-        <h2>📤 Esporta il riepilogo</h2>
+        <h2> Esporta il riepilogo</h2>
         <div class="export-panel">
           <h3>1. Scegli il periodo</h3>
           <div class="radio-group">
@@ -665,7 +669,7 @@
             </label>
             <label>
               <input type="radio" name="export-period" value="annuale" />
-              <span>📆 Annuale</span>
+              <span> Annuale</span>
             </label>
           </div>
           <h3>2. Scegli il formato</h3>
@@ -738,7 +742,7 @@
 
     <section id="checklist" class="tab">
       <div class="card">
-        <h2>📋 Checklist</h2>
+        <h2> Checklist</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 8px;">Un passo alla volta: bastano circa 2 ore in tutto.</p>
         <div style="font-size: 0.85rem; margin-bottom: 12px;">
           <strong>Avanzamento:</strong> <span id="check-progress">0</span>/<span id="check-total">0</span> completati
@@ -806,7 +810,7 @@
           </label>
         </div>
 
-        <h3 style="margin-top: 24px; color: var(--danger);">🗑️ Cancella dati</h3>
+        <h3 style="margin-top: 24px; color: var(--danger);">️ Cancella dati</h3>
         <div class="danger-box">
           <strong>Attenzione:</strong> queste azioni cancelleranno i tuoi dati. L'operazione non può essere annullata.
         </div>
@@ -823,7 +827,7 @@
         <h3 style="margin-top: 24px;">ℹ️ Informazioni</h3>
         <div class="info-box">
           <strong>DOVE FINISCONO I MIEI SOLDI</strong><br>
-          Versione 1.5 (con sicurezza avanzata)<br>
+          Versione 1.7 (con icone esterne e cache versioning)<br>
           🔐 Sessione automatica: quando chiudi l'app, devi fare nuovamente il login.<br>
           🔑 Recupero password disponibile nella schermata di accesso.<br><br>
           Strumento educativo: non è consulenza finanziaria e non promette guadagni.
@@ -884,7 +888,6 @@
       firebaseAuth = firebase.auth();
       firebaseDb = firebase.firestore();
       
-      // 🔐 SESSION PERSISTENCE: la sessione dura solo finché la tab è aperta
       firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(() => {
           console.log('Persistenza SESSION attivata');
@@ -899,7 +902,6 @@
       showLoginError('Errore Firebase: ' + err.message);
     }
 
-    // 🔒 Logout forzato quando l'utente chiude la pagina
     window.addEventListener('beforeunload', () => {
       if (currentUser && firebaseAuth) {
         firebaseAuth.signOut().catch(() => {});
@@ -1008,25 +1010,20 @@
       error.classList.add('show');
     }
 
-    // 🔑 RECUPERO PASSWORD - Funzione corretta
+    // ✅ FIX: Modal password dimenticata con display flex forzato
     function showForgotPassword() {
       const modal = document.getElementById('forgotPasswordModal');
       const emailField = document.getElementById('forgotEmail');
       const errorEl = document.getElementById('forgotError');
       const successEl = document.getElementById('forgotSuccess');
       
-      // Pre-compila con l'email già inserita nel login
       const loginEmail = document.getElementById('loginEmail').value;
-      if (loginEmail) {
-        emailField.value = loginEmail;
-      } else {
-        emailField.value = '';
-      }
+      emailField.value = loginEmail || '';
       
       errorEl.classList.remove('show');
       successEl.classList.remove('show');
       
-      // 🔧 FIX: usa 'flex' invece di 'block' per centrare il modal
+      // Forza la visualizzazione del modal
       modal.style.display = 'flex';
       modal.classList.add('active');
       
@@ -1132,7 +1129,6 @@
       ]}
     ];
 
-    // ============ PERSISTENZA ============
     function save() { 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       if (currentUser) {
@@ -1159,7 +1155,6 @@
       if (!state.checklist) state.checklist = {};
     }
 
-    // ============ UTILS ============
     function fmt(n) {
       return '€ ' + (Math.round(n * 100) / 100).toLocaleString('it-IT', {minimumFractionDigits: 0, maximumFractionDigits: 2});
     }
@@ -1168,7 +1163,6 @@
     }
     function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
-    // ============ TOAST ============
     function showToast(message, type = '') {
       const toast = document.getElementById('toast');
       toast.textContent = message;
@@ -1177,7 +1171,6 @@
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
-    // ============ MODALS ============
     function showModal(id) { 
       const modal = document.getElementById(id);
       modal.style.display = 'flex';
@@ -1191,7 +1184,6 @@
     function showDeleteLocalModal() { showModal('deleteLocalModal'); }
     function showDeleteCloudModal() { showModal('deleteCloudModal'); }
 
-    // ============ NAVIGAZIONE ============
     function switchTab(id) {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -1204,7 +1196,6 @@
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
-    // ============ ENTRATE ============
     function addEntrata() {
       state.entrate.push({ id: uid(), voce: '', importo: '', frequenza: 'Mensile' });
       save(); renderEntrate();
@@ -1237,7 +1228,6 @@
       document.getElementById('tot-entrate-annuali').textContent = fmt(tot * 12);
     }
 
-    // ============ SPESE ============
     function addSpesa() {
       state.spese.push({ id: uid(), categoria: 'Casa', voce: '', importo: '', frequenza: 'Mensile' });
       save(); renderSpese();
@@ -1274,7 +1264,6 @@
       document.getElementById('tot-spese-annuali').textContent = fmt(tot * 12);
     }
 
-    // ============ ABBONAMENTI ============
     function addAbbonamento() {
       state.abbonamenti.push({ id: uid(), categoria: 'Abbonamenti', voce: '', importo: '', frequenza: 'Mensile' });
       save(); renderAbbonamenti();
@@ -1310,7 +1299,6 @@
       document.getElementById('tot-abbonamenti').textContent = fmt(tot);
     }
 
-    // ============ RIEPILOGO ============
     function calcolaRiepilogo() {
       const entrate = state.entrate.reduce((s, e) => s + toMonthly(e.importo, e.frequenza), 0);
       const tutteSpese = [...state.spese, ...state.abbonamenti];
@@ -1407,7 +1395,6 @@
       }
     }
 
-    // ============ DOMANDE ============
     document.querySelectorAll('textarea[data-key]').forEach(ta => {
       ta.addEventListener('input', () => {
         state.domande[ta.dataset.key] = ta.value;
@@ -1420,7 +1407,6 @@
       });
     }
 
-    // ============ AZIONI ============
     function addAzione() {
       state.azioni.push({ id: uid(), azione: '', risparmio: '', entro: '' });
       save(); renderAzioni();
@@ -1451,7 +1437,6 @@
       document.getElementById('tot-azioni').textContent = fmt(tot) + '/mese';
     }
 
-    // ============ CHECKLIST ============
     function renderChecklist() {
       const list = document.getElementById('checklist-list');
       let html = '';
@@ -1487,7 +1472,6 @@
       }
     }
 
-    // ============ CLOUD SAVE/LOAD ============
     async function saveToCloud(silent = false) {
       if (!currentUser) {
         if (!silent) showToast('❌ Non connesso', 'error');
@@ -1538,7 +1522,6 @@
       }
     }
 
-    // ============ DELETE DATA ============
     async function deleteLocalData() {
       state = { entrate: [], spese: [], abbonamenti: [], azioni: [], domande: {}, checklist: {} };
       localStorage.removeItem(STORAGE_KEY);
@@ -1565,7 +1548,6 @@
       }
     }
 
-    // ============ EXPORT HELPERS ============
     function getExportData(source = 'riepilogo') {
       const periodRadio = source === 'impostazioni'
         ? document.querySelector('input[name="export-period-2"]:checked')
@@ -1591,7 +1573,6 @@
       return str + ' '.repeat(Math.max(0, len - str.length));
     }
 
-    // ============ EXPORT HTML ============
     function exportHTML(source = 'riepilogo') {
       const { period, mult, d, today } = getExportData(source);
       const periodLabel = period === 'annuale' ? 'ANNUALE' : 'MENSILE';
@@ -1617,7 +1598,6 @@
       showToast('✅ File HTML scaricato', 'success');
     }
 
-    // ============ EXPORT TXT ============
     function exportTXT(source = 'riepilogo') {
       const { period, mult, d, today } = getExportData(source);
       const periodLabel = period === 'annuale' ? 'ANNUALE' : 'MENSILE';
@@ -1638,7 +1618,6 @@
       showToast('✅ File TXT scaricato', 'success');
     }
 
-    // ============ EXPORT PDF ============
     function exportPDF(source = 'riepilogo') {
       try {
         const { period, mult, d, today } = getExportData(source);
@@ -1695,7 +1674,6 @@
       }
     }
 
-    // ============ EXPORT/IMPORT JSON ============
     function exportJSON() {
       const data = JSON.stringify(state, null, 2);
       const today = new Date().toLocaleDateString('it-IT').replace(/\//g, '-');
@@ -1731,7 +1709,6 @@
       event.target.value = '';
     }
 
-    // ============ RENDER ALL ============
     function renderAll() {
       renderEntrate();
       renderSpese();
@@ -1741,19 +1718,19 @@
       loadDomande();
     }
 
-    // ============ CLOSE MODALS ON OUTSIDE CLICK ============
     document.querySelectorAll('.modal-overlay').forEach(m => {
       m.addEventListener('click', (e) => {
         if (e.target === m) hideModal(m.id);
       });
     });
 
-    // ============ INIT ============
     load();
     renderAll();
 
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error:', err));
+      navigator.serviceWorker.register('sw.js').then((registration) => {
+        console.log('[SW] Registrato con successo:', registration.scope);
+      }).catch(err => console.log('[SW] Errore registrazione:', err));
     }
   </script>
 </body>
