@@ -11,21 +11,19 @@
   "categories": ["finance", "productivity"],
   "icons": [
     {
-      "src": "./icon-mobile.svg",
+      "src": "./icon-mobile.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "./icon-mobile.svg",
+      "src": "./icon-mobile.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "./icon-pc.svg",
+      "src": "./icon-pc.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
