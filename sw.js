@@ -6,7 +6,6 @@
 const CACHE_VERSION = 'v1.7';
 const CACHE_NAME = `dove-finiscono-soldi-${CACHE_VERSION}`;
 
-// File da cachare per il funzionamento offline
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -20,7 +19,6 @@ const ASSETS_TO_CACHE = [
   'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js'
 ];
 
-// INSTALLAZIONE: cache i file essenziali
 self.addEventListener('install', (event) => {
   console.log('[SW] Installazione - Versione:', CACHE_VERSION);
   event.waitUntil(
@@ -29,34 +27,29 @@ self.addEventListener('install', (event) => {
         console.log('[SW] Cache aperta:', CACHE_NAME);
         return cache.addAll(ASSETS_TO_CACHE);
       })
-      .then(() => self.skipWaiting()) // Forza l'attivazione immediata
+      .then(() => self.skipWaiting())
   );
 });
 
-// ATTIVAZIONE: elimina le vecchie cache
 self.addEventListener('activate', (event) => {
   console.log('[SW] Attivazione - Versione:', CACHE_VERSION);
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          // Se la cache non è quella corrente, eliminala
           if (cacheName !== CACHE_NAME && cacheName.startsWith('dove-finiscono-soldi-')) {
             console.log('[SW] Eliminata vecchia cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
-    }).then(() => self.clients.claim()) // Prende il controllo immediato
+    }).then(() => self.clients.claim())
   );
 });
 
-// FETCH: strategia "cache first, then network"
 self.addEventListener('fetch', (event) => {
-  // Ignora le richieste non-GET
   if (event.request.method !== 'GET') return;
   
-  // Ignora le richieste a Firebase (devono essere sempre live)
   if (event.request.url.includes('firebaseio.com') || 
       event.request.url.includes('googleapis.com')) {
     return;
@@ -66,7 +59,6 @@ self.addEventListener('fetch', (event) => {
     caches.match(event.request)
       .then((cachedResponse) => {
         if (cachedResponse) {
-          // Se c'è in cache, restituiscila e aggiornala in background
           const fetchPromise = fetch(event.request)
             .then((networkResponse) => {
               if (networkResponse && networkResponse.status === 200) {
@@ -76,12 +68,11 @@ self.addEventListener('fetch', (event) => {
                 });
               }
             })
-            .catch(() => {}); // Ignora errori di rete
+            .catch(() => {});
           
           return cachedResponse;
         }
         
-        // Se non è in cache, prova la rete
         return fetch(event.request)
           .then((networkResponse) => {
             if (networkResponse && networkResponse.status === 200) {
@@ -93,7 +84,6 @@ self.addEventListener('fetch', (event) => {
             return networkResponse;
           })
           .catch(() => {
-            // Fallback: se offline e non in cache, restituisci index.html
             if (event.request.destination === 'document') {
               return caches.match('./index.html');
             }
