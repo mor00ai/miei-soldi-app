@@ -12,9 +12,9 @@
   
   <link rel="manifest" href="manifest.json" />
   
-  <!-- Icone esterne -->
-  <link rel="icon" type="image/svg+xml" href="icon-pc.svg" />
-  <link rel="apple-touch-icon" href="icon-mobile.svg" />
+  <!-- Icone SVG inline - funzionano su tutti i browser moderni -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230f172a'/%3E%3Cstop offset='50%25' style='stop-color:%231e3a8a'/%3E%3Cstop offset='100%25' style='stop-color:%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='90' fill='url(%23bg)'/%3E%3Cpath d='M 80 400 L 80 350 Q 160 330 220 280 T 340 180 T 440 100 L 440 400 Z' fill='%233b82f6' opacity='0.3'/%3E%3Cpath d='M 80 350 Q 160 330 220 280 T 340 180 T 440 100' stroke='white' stroke-width='8' fill='none' stroke-linecap='round' opacity='0.9'/%3E%3Ccircle cx='440' cy='100' r='12' fill='white'/%3E%3Ctext x='200' y='360' font-size='220' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E€%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231e3a8a'/%3E%3Cstop offset='100%25' style='stop-color:%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='110' fill='url(%23bg2)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E€%3C/text%3E%3C/svg%3E" />
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
@@ -265,7 +265,6 @@
     .export-buttons {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px;
     }
-    /* ✅ FIX: z-index altissimo per i modal */
     .modal-overlay {
       display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0,0,0,0.7); z-index: 100000;
@@ -462,13 +461,13 @@
     <button data-tab="analisi">🔍 Analisi</button>
     <button data-tab="azioni">✅ Azioni</button>
     <button data-tab="checklist">📋 Checklist</button>
-    <button data-tab="impostazioni">⚙️ Impostazioni</button>
+    <button data-tab="impostazioni">️ Impostazioni</button>
   </nav>
 
   <main>
     <section id="intro" class="tab active">
       <div class="card">
-        <h2>👋 Benvenuto</h2>
+        <h2> Benvenuto</h2>
         <p>Questa app ti aiuta a costruire la tua <strong>fotografia finanziaria</strong>: quanto entra, quanto esce e dove finiscono i tuoi soldi. Bastano circa 2 ore in tutto.</p>
         <div class="info-box" style="margin-top: 14px;">
           <strong>Cosa ti serve:</strong><br>
@@ -498,7 +497,7 @@
         <h2>🔄 Come convertire in mensile</h2>
         <div style="font-size: 0.85rem;">
           <p><strong>Settimanale:</strong> importo × 52 ÷ 12</p>
-          <p><strong>Bimestrale:</strong> importo ÷ 2</p>
+          <p><strong>Bimestrale:</strong> importo  2</p>
           <p><strong>Trimestrale:</strong> importo ÷ 3</p>
           <p><strong>Semestrale:</strong> importo ÷ 6</p>
           <p><strong>Annuale:</strong> importo ÷ 12</p>
@@ -592,7 +591,7 @@
 
     <section id="riepilogo" class="tab">
       <div class="card">
-        <h2>📊 La tua fotografia</h2>
+        <h2> La tua fotografia</h2>
         <div class="summary-box">
           <div class="summary-item">
             <div class="label">Entrate</div>
@@ -659,7 +658,7 @@
         <div id="top-categorie"></div>
       </div>
       <div class="card">
-        <h2> Esporta il riepilogo</h2>
+        <h2>📤 Esporta il riepilogo</h2>
         <div class="export-panel">
           <h3>1. Scegli il periodo</h3>
           <div class="radio-group">
@@ -669,12 +668,12 @@
             </label>
             <label>
               <input type="radio" name="export-period" value="annuale" />
-              <span> Annuale</span>
+              <span>📆 Annuale</span>
             </label>
           </div>
           <h3>2. Scegli il formato</h3>
           <div class="export-buttons">
-            <button class="btn accent" onclick="exportHTML()">🌐 HTML</button>
+            <button class="btn accent" onclick="exportHTML()"> HTML</button>
             <button class="btn secondary" onclick="exportTXT()">📄 TXT</button>
             <button class="btn success" onclick="exportPDF()">📕 PDF</button>
           </div>
@@ -742,7 +741,7 @@
 
     <section id="checklist" class="tab">
       <div class="card">
-        <h2> Checklist</h2>
+        <h2>📋 Checklist</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 8px;">Un passo alla volta: bastano circa 2 ore in tutto.</p>
         <div style="font-size: 0.85rem; margin-bottom: 12px;">
           <strong>Avanzamento:</strong> <span id="check-progress">0</span>/<span id="check-total">0</span> completati
@@ -774,7 +773,7 @@
 
           <div class="btn-row">
             <button class="btn success" onclick="saveToCloud()">💾 Salva ora</button>
-            <button class="btn accent" onclick="loadFromCloud()">📥 Carica dal cloud</button>
+            <button class="btn accent" onclick="loadFromCloud()"> Carica dal cloud</button>
           </div>
 
           <div class="info-box" style="margin-top: 12px;">
@@ -791,31 +790,31 @@
           </label>
           <label>
             <input type="radio" name="export-period-2" value="annuale" />
-            <span>📆 Vista annuale</span>
+            <span> Vista annuale</span>
           </label>
         </div>
         <div class="export-buttons">
           <button class="btn accent" onclick="exportHTML('impostazioni')">🌐 HTML</button>
           <button class="btn secondary" onclick="exportTXT('impostazioni')">📄 TXT</button>
-          <button class="btn success" onclick="exportPDF('impostazioni')">📕 PDF</button>
+          <button class="btn success" onclick="exportPDF('impostazioni')"> PDF</button>
         </div>
 
         <h3 style="margin-top: 24px;">💾 Backup locale</h3>
         <p style="font-size: 0.85rem; margin: 8px 0;">Salva o ripristina tutti i dati in un file JSON.</p>
         <div class="btn-row">
-          <button class="btn secondary" onclick="exportJSON()">📤 Esporta JSON</button>
+          <button class="btn secondary" onclick="exportJSON()"> Esporta JSON</button>
           <label class="btn secondary" style="cursor: pointer;">
             📥 Importa JSON
             <input type="file" accept=".json" onchange="importJSON(event)" style="display: none;" />
           </label>
         </div>
 
-        <h3 style="margin-top: 24px; color: var(--danger);">️ Cancella dati</h3>
+        <h3 style="margin-top: 24px; color: var(--danger);">🗑️ Cancella dati</h3>
         <div class="danger-box">
           <strong>Attenzione:</strong> queste azioni cancelleranno i tuoi dati. L'operazione non può essere annullata.
         </div>
         <div class="btn-row">
-          <button class="btn danger" onclick="showDeleteLocalModal()">🗑️ Cancella dati locali</button>
+          <button class="btn danger" onclick="showDeleteLocalModal()">️ Cancella dati locali</button>
           <button class="btn danger" onclick="showDeleteCloudModal()">☁️ Cancella dati dal cloud</button>
         </div>
 
@@ -827,7 +826,7 @@
         <h3 style="margin-top: 24px;">ℹ️ Informazioni</h3>
         <div class="info-box">
           <strong>DOVE FINISCONO I MIEI SOLDI</strong><br>
-          Versione 1.7 (con icone esterne e cache versioning)<br>
+          Versione 1.9 (icone SVG inline)<br>
           🔐 Sessione automatica: quando chiudi l'app, devi fare nuovamente il login.<br>
           🔑 Recupero password disponibile nella schermata di accesso.<br><br>
           Strumento educativo: non è consulenza finanziaria e non promette guadagni.
@@ -1010,7 +1009,6 @@
       error.classList.add('show');
     }
 
-    // ✅ FIX: Modal password dimenticata con display flex forzato
     function showForgotPassword() {
       const modal = document.getElementById('forgotPasswordModal');
       const emailField = document.getElementById('forgotEmail');
@@ -1023,11 +1021,8 @@
       errorEl.classList.remove('show');
       successEl.classList.remove('show');
       
-      // Forza la visualizzazione del modal
       modal.style.display = 'flex';
       modal.classList.add('active');
-      
-      console.log('Modal password dimenticata aperto');
     }
 
     async function sendPasswordReset() {
@@ -1065,7 +1060,7 @@
     async function logout() {
       if (confirm('Vuoi davvero uscire dall\'account? Dovrai reinserire email e password al prossimo accesso.')) {
         await firebaseAuth.signOut();
-        showToast('👋 Disconnesso', 'success');
+        showToast(' Disconnesso', 'success');
       }
     }
 
