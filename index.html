@@ -264,24 +264,26 @@
     .export-buttons {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px;
     }
+    /* 🔧 FIX: z-index dei modal portato a 20000 (sopra la login screen che è 9999) */
     .modal-overlay {
       display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5); z-index: 1000;
+      background: rgba(0,0,0,0.6); z-index: 20000;
       align-items: center; justify-content: center; padding: 20px;
     }
     .modal-overlay.active { display: flex; }
     .modal {
       background: white; border-radius: 12px; padding: 24px;
-      max-width: 400px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      max-width: 400px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      z-index: 20001;
     }
     .modal h3 { margin-bottom: 12px; font-size: 1.1rem; }
     .modal p { margin-bottom: 16px; font-size: 0.9rem; }
-    .modal-buttons { display: flex; gap: 8px; justify-content: flex-end; }
+    .modal-buttons { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
     .toast {
       position: fixed; bottom: 20px; left: 50%;
       transform: translateX(-50%) translateY(100px);
       background: var(--text); color: white; padding: 12px 20px;
-      border-radius: 8px; font-size: 0.9rem; z-index: 2000;
+      border-radius: 8px; font-size: 0.9rem; z-index: 30000;
       transition: transform 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
@@ -305,13 +307,6 @@
     .sync-info {
       font-size: 0.8rem; color: var(--muted); margin-top: 8px;
     }
-    .spinner {
-      display: inline-block; width: 14px; height: 14px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 50%; border-top-color: white;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
     
     /* LOGIN SCREEN */
     .login-screen {
@@ -319,6 +314,7 @@
       background: linear-gradient(135deg, var(--primary), var(--primary-light));
       display: flex; align-items: center; justify-content: center;
       z-index: 9999; padding: 20px;
+      overflow-y: auto;
     }
     .login-screen.hidden { display: none; }
     .login-box {
@@ -362,6 +358,7 @@
     }
     .login-box .forgot-link a {
       color: var(--primary-light); text-decoration: none; cursor: pointer;
+      font-weight: 500;
     }
     .login-box .forgot-link a:hover { text-decoration: underline; }
     .login-error {
@@ -458,7 +455,7 @@
     <button data-tab="spese">💸 Spese</button>
     <button data-tab="abbonamenti">📱 Abbonamenti</button>
     <button data-tab="riepilogo">📊 Riepilogo</button>
-    <button data-tab="analisi"> Analisi</button>
+    <button data-tab="analisi">🔍 Analisi</button>
     <button data-tab="azioni">✅ Azioni</button>
     <button data-tab="checklist">📋 Checklist</button>
     <button data-tab="impostazioni">⚙️ Impostazioni</button>
@@ -467,7 +464,7 @@
   <main>
     <section id="intro" class="tab active">
       <div class="card">
-        <h2> Benvenuto</h2>
+        <h2>👋 Benvenuto</h2>
         <p>Questa app ti aiuta a costruire la tua <strong>fotografia finanziaria</strong>: quanto entra, quanto esce e dove finiscono i tuoi soldi. Bastano circa 2 ore in tutto.</p>
         <div class="info-box" style="margin-top: 14px;">
           <strong>Cosa ti serve:</strong><br>
@@ -612,7 +609,7 @@
         </div>
       </div>
       <div class="card">
-        <h2> Spese per categoria</h2>
+        <h2>📈 Spese per categoria</h2>
         <div id="categoria-chart" class="bar-chart"></div>
       </div>
       <div class="card">
@@ -683,7 +680,7 @@
 
     <section id="analisi" class="tab">
       <div class="card">
-        <h2> Dove finiscono davvero i tuoi soldi?</h2>
+        <h2>🔍 Dove finiscono davvero i tuoi soldi?</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Rispondi con sincerità: nessuno leggerà le tue risposte.</p>
         <div class="question">
           <label>Quale cifra mi ha sorpreso di più?</label>
@@ -756,7 +753,7 @@
 
     <section id="impostazioni" class="tab">
       <div class="card">
-        <h2>️ Impostazioni</h2>
+        <h2>⚙️ Impostazioni</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 16px;">Gestisci i tuoi dati, il cloud e le esportazioni.</p>
 
         <div class="cloud-section">
@@ -772,12 +769,8 @@
           </div>
 
           <div class="btn-row">
-            <button class="btn success" onclick="saveToCloud()">
-              💾 Salva ora
-            </button>
-            <button class="btn accent" onclick="loadFromCloud()">
-              📥 Carica dal cloud
-            </button>
+            <button class="btn success" onclick="saveToCloud()">💾 Salva ora</button>
+            <button class="btn accent" onclick="loadFromCloud()">📥 Carica dal cloud</button>
           </div>
 
           <div class="info-box" style="margin-top: 12px;">
@@ -813,7 +806,7 @@
           </label>
         </div>
 
-        <h3 style="margin-top: 24px; color: var(--danger);">️ Cancella dati</h3>
+        <h3 style="margin-top: 24px; color: var(--danger);">🗑️ Cancella dati</h3>
         <div class="danger-box">
           <strong>Attenzione:</strong> queste azioni cancelleranno i tuoi dati. L'operazione non può essere annullata.
         </div>
@@ -830,7 +823,7 @@
         <h3 style="margin-top: 24px;">ℹ️ Informazioni</h3>
         <div class="info-box">
           <strong>DOVE FINISCONO I MIEI SOLDI</strong><br>
-          Versione 1.4 (con sicurezza avanzata)<br>
+          Versione 1.5 (con sicurezza avanzata)<br>
           🔐 Sessione automatica: quando chiudi l'app, devi fare nuovamente il login.<br>
           🔑 Recupero password disponibile nella schermata di accesso.<br><br>
           Strumento educativo: non è consulenza finanziaria e non promette guadagni.
@@ -892,7 +885,6 @@
       firebaseDb = firebase.firestore();
       
       // 🔐 SESSION PERSISTENCE: la sessione dura solo finché la tab è aperta
-      // Quando l'utente chiude la tab/browser, Firebase fa logout automatico
       firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(() => {
           console.log('Persistenza SESSION attivata');
@@ -907,7 +899,7 @@
       showLoginError('Errore Firebase: ' + err.message);
     }
 
-    //  Logout forzato quando l'utente chiude la pagina (backup sicurezza)
+    // 🔒 Logout forzato quando l'utente chiude la pagina
     window.addEventListener('beforeunload', () => {
       if (currentUser && firebaseAuth) {
         firebaseAuth.signOut().catch(() => {});
@@ -925,7 +917,6 @@
         } else {
           currentUser = null;
           document.getElementById('loginScreen').classList.remove('hidden');
-          // Pulisci i campi login per sicurezza
           document.getElementById('loginEmail').value = '';
           document.getElementById('loginPassword').value = '';
           document.getElementById('loginConfirmPassword').value = '';
@@ -1000,10 +991,11 @@
         let message = 'Errore: ' + err.message;
         if (err.code === 'auth/user-not-found') message = 'Utente non trovato';
         else if (err.code === 'auth/wrong-password') message = 'Password errata';
+        else if (err.code === 'auth/invalid-credential') message = 'Credenziali non valide. Controlla email e password.';
         else if (err.code === 'auth/email-already-in-use') message = 'Email già registrata';
         else if (err.code === 'auth/invalid-email') message = 'Email non valida';
         else if (err.code === 'auth/weak-password') message = 'Password troppo debole (min 6 caratteri)';
-        else if (err.code === 'auth/too-many-requests') message = 'Troppi tentativi. Riprova più tardi.';
+        else if (err.code === 'auth/too-many-requests') message = 'Troppi tentativi. Riprova più tardi o usa "Password dimenticata".';
         showLoginError(message);
       }
     }
@@ -1016,20 +1008,29 @@
       error.classList.add('show');
     }
 
-    function showLoginSuccess(message) {
-      const success = document.getElementById('loginSuccess');
-      const error = document.getElementById('loginError');
-      error.classList.remove('show');
-      success.textContent = message;
-      success.classList.add('show');
-    }
-
-    // 🔑 RECUPERO PASSWORD
+    // 🔑 RECUPERO PASSWORD - Funzione corretta
     function showForgotPassword() {
-      document.getElementById('forgotEmail').value = document.getElementById('loginEmail').value;
-      document.getElementById('forgotError').classList.remove('show');
-      document.getElementById('forgotSuccess').classList.remove('show');
-      showModal('forgotPasswordModal');
+      const modal = document.getElementById('forgotPasswordModal');
+      const emailField = document.getElementById('forgotEmail');
+      const errorEl = document.getElementById('forgotError');
+      const successEl = document.getElementById('forgotSuccess');
+      
+      // Pre-compila con l'email già inserita nel login
+      const loginEmail = document.getElementById('loginEmail').value;
+      if (loginEmail) {
+        emailField.value = loginEmail;
+      } else {
+        emailField.value = '';
+      }
+      
+      errorEl.classList.remove('show');
+      successEl.classList.remove('show');
+      
+      // 🔧 FIX: usa 'flex' invece di 'block' per centrare il modal
+      modal.style.display = 'flex';
+      modal.classList.add('active');
+      
+      console.log('Modal password dimenticata aperto');
     }
 
     async function sendPasswordReset() {
@@ -1050,14 +1051,17 @@
         await firebaseAuth.sendPasswordResetEmail(email);
         successEl.textContent = '✅ Email inviata! Controlla la tua casella di posta (anche lo spam).';
         successEl.classList.add('show');
+        errorEl.classList.remove('show');
       } catch (err) {
         console.error('Reset error:', err);
         let message = 'Errore: ' + err.message;
         if (err.code === 'auth/user-not-found') message = 'Nessun account trovato con questa email';
         else if (err.code === 'auth/invalid-email') message = 'Email non valida';
         else if (err.code === 'auth/too-many-requests') message = 'Troppi tentativi. Riprova più tardi.';
+        else if (err.code === 'auth/missing-email') message = 'Inserisci un indirizzo email';
         errorEl.textContent = message;
         errorEl.classList.add('show');
+        successEl.classList.remove('show');
       }
     }
 
@@ -1174,8 +1178,16 @@
     }
 
     // ============ MODALS ============
-    function showModal(id) { document.getElementById(id).classList.add('active'); }
-    function hideModal(id) { document.getElementById(id).classList.remove('active'); }
+    function showModal(id) { 
+      const modal = document.getElementById(id);
+      modal.style.display = 'flex';
+      modal.classList.add('active');
+    }
+    function hideModal(id) { 
+      const modal = document.getElementById(id);
+      modal.style.display = 'none';
+      modal.classList.remove('active');
+    }
     function showDeleteLocalModal() { showModal('deleteLocalModal'); }
     function showDeleteCloudModal() { showModal('deleteCloudModal'); }
 
@@ -1732,7 +1744,7 @@
     // ============ CLOSE MODALS ON OUTSIDE CLICK ============
     document.querySelectorAll('.modal-overlay').forEach(m => {
       m.addEventListener('click', (e) => {
-        if (e.target === m) m.classList.remove('active');
+        if (e.target === m) hideModal(m.id);
       });
     });
 
