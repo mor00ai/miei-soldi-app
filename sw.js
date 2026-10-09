@@ -1,17 +1,10 @@
-const CACHE_VERSION = 'v1.8';
+const CACHE_VERSION = 'v1.9';
 const CACHE_NAME = `dove-finiscono-soldi-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './manifest.json',
-  './icon-mobile.png',
-  './icon-pc.png',
-  'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js',
-  'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js',
-  'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js',
-  'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js'
+  './manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
