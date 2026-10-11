@@ -11,8 +11,6 @@
   <title>DOVE FINISCONO I MIEI SOLDI</title>
   
   <link rel="manifest" href="manifest.json" />
-  
-  <!-- Icone SVG inline - funzionano su tutti i browser moderni -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230f172a'/%3E%3Cstop offset='50%25' style='stop-color:%231e3a8a'/%3E%3Cstop offset='100%25' style='stop-color:%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='90' fill='url(%23bg)'/%3E%3Cpath d='M 80 400 L 80 350 Q 160 330 220 280 T 340 180 T 440 100 L 440 400 Z' fill='%233b82f6' opacity='0.3'/%3E%3Cpath d='M 80 350 Q 160 330 220 280 T 340 180 T 440 100' stroke='white' stroke-width='8' fill='none' stroke-linecap='round' opacity='0.9'/%3E%3Ccircle cx='440' cy='100' r='12' fill='white'/%3E%3Ctext x='200' y='360' font-size='220' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E€%3C/text%3E%3C/svg%3E" />
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231e3a8a'/%3E%3Cstop offset='100%25' style='stop-color:%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='110' fill='url(%23bg2)'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E€%3C/text%3E%3C/svg%3E" />
   
@@ -74,7 +72,7 @@
       cursor: pointer; transition: all 0.2s; white-space: nowrap;
     }
     nav button.active { color: var(--primary); border-bottom-color: var(--primary); }
-    main { max-width: 900px; margin: 0 auto; padding: 16px; }
+    main { max-width: 1100px; margin: 0 auto; padding: 16px; }
     .tab { display: none; animation: fadeIn 0.3s; }
     .tab.active { display: block; }
     @keyframes fadeIn {
@@ -91,7 +89,7 @@
     }
     .card h3 { font-size: 0.95rem; color: var(--text); margin: 14px 0 8px; }
     .row {
-      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      display: grid; grid-template-columns: 110px 2fr 1fr 1fr;
       gap: 8px; margin-bottom: 8px; align-items: center;
     }
     .row.header {
@@ -101,7 +99,7 @@
     }
     input, select, textarea {
       width: 100%; padding: 10px; border: 1px solid var(--border);
-      border-radius: 8px; font-size: 0.95rem; background: white;
+      border-radius: 8px; font-size: 0.9rem; background: white;
       transition: border 0.2s; font-family: inherit;
     }
     input:focus, select:focus, textarea:focus {
@@ -189,11 +187,11 @@
       margin: 16px 0 8px; letter-spacing: 0.5px;
     }
     .expense-row {
-      display: grid; grid-template-columns: 1.5fr 2fr 1fr 1fr 30px;
-      gap: 6px; margin-bottom: 6px; align-items: center;
+      display: grid; grid-template-columns: 90px 1.1fr 1.3fr 0.9fr 0.9fr 0.9fr 0.9fr 30px;
+      gap: 5px; margin-bottom: 6px; align-items: center;
     }
     .expense-row.header {
-      font-size: 0.7rem; text-transform: uppercase;
+      font-size: 0.65rem; text-transform: uppercase;
       color: var(--muted); font-weight: 600;
       padding-bottom: 4px; border-bottom: 1px solid var(--border);
     }
@@ -227,6 +225,19 @@
       background: #fee2e2; border-left: 4px solid var(--danger);
       padding: 14px; border-radius: 8px; margin-bottom: 12px; font-size: 0.9rem;
     }
+    .rata-info {
+      background: #ecfdf5; border-left: 4px solid var(--success);
+      padding: 10px; border-radius: 8px; margin-top: 6px; font-size: 0.85rem;
+    }
+    .rata-info .rata-details {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 8px; margin-top: 8px;
+    }
+    .rata-info .rata-item {
+      background: white; padding: 8px; border-radius: 6px; text-align: center;
+    }
+    .rata-info .rata-item .label { font-size: 0.7rem; color: var(--muted); }
+    .rata-info .rata-item .value { font-size: 1rem; font-weight: 700; color: var(--primary); }
     footer {
       text-align: center; padding: 20px; color: var(--muted);
       font-size: 0.8rem; border-top: 1px solid var(--border);
@@ -253,7 +264,7 @@
       display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;
     }
     .radio-group label {
-      flex: 1; min-width: 120px; padding: 10px 14px;
+      flex: 1; min-width: 100px; padding: 10px 14px;
       border: 2px solid var(--border); border-radius: 8px;
       cursor: pointer; text-align: center; font-size: 0.9rem;
       font-weight: 500; transition: all 0.2s; background: white;
@@ -276,12 +287,14 @@
     }
     .modal {
       background: white; border-radius: 12px; padding: 24px;
-      max-width: 400px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-      z-index: 100001;
+      max-width: 500px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      z-index: 100001; max-height: 90vh; overflow-y: auto;
     }
     .modal h3 { margin-bottom: 12px; font-size: 1.1rem; }
     .modal p { margin-bottom: 16px; font-size: 0.9rem; }
     .modal-buttons { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+    .modal .form-group { margin-bottom: 12px; }
+    .modal label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
     .toast {
       position: fixed; bottom: 20px; left: 50%;
       transform: translateX(-50%) translateY(100px);
@@ -310,8 +323,115 @@
     .sync-info {
       font-size: 0.8rem; color: var(--muted); margin-top: 8px;
     }
+    .bonifico-card {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border: 2px solid var(--accent);
+      border-radius: 12px; padding: 16px; margin-bottom: 12px;
+    }
+    .bonifico-card h4 { color: var(--primary); margin-bottom: 8px; }
+    .bonifico-card .bonifico-details {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px; margin-top: 10px;
+    }
+    .bonifico-card .detail-item {
+      background: white; padding: 10px; border-radius: 8px;
+    }
+    .bonifico-card .detail-item .label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+    .bonifico-card .detail-item .value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+    .bonifico-card .progress-bar { margin-top: 10px; }
     
-    /* LOGIN SCREEN */
+    .bollettino-card {
+      background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+      border: 2px solid #7c3aed;
+      border-radius: 12px; padding: 16px; margin-bottom: 12px;
+    }
+    .bollettino-card h4 { color: #5b21b6; margin-bottom: 8px; }
+    .bollettino-card .bonifico-details {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px; margin-top: 10px;
+    }
+    .bollettino-card .detail-item {
+      background: white; padding: 10px; border-radius: 8px;
+    }
+    .bollettino-card .detail-item .label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+    .bollettino-card .detail-item .value { font-size: 1.1rem; font-weight: 700; color: #5b21b6; }
+    
+    .search-box {
+      background: #f8fafc;
+      border: 2px solid var(--primary-light);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .search-box label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+    .search-box input:focus {
+      border-color: var(--primary-light);
+      outline: none;
+    }
+    .search-results {
+      margin-top: 12px;
+    }
+    .search-result-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .search-result-item:hover {
+      border-color: var(--primary-light);
+      box-shadow: 0 2px 8px rgba(59,130,246,0.1);
+    }
+    .search-result-item .result-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .search-result-item .result-details {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .tab-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .tab-toggle button {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid var(--border);
+      background: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .tab-toggle button.active-bon {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .tab-toggle button.active-bol {
+      background: #7c3aed;
+      color: #fff;
+      border-color: #7c3aed;
+    }
     .login-screen {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(135deg, var(--primary), var(--primary-light));
@@ -377,9 +497,19 @@
     }
     .login-success.show { display: block; }
     
-    @media (max-width: 600px) {
-      .row { grid-template-columns: 1.5fr 1fr 1fr; }
-      .expense-row { grid-template-columns: 1.3fr 1.7fr 1fr 1fr 25px; font-size: 0.85rem; }
+    @media (max-width: 768px) {
+      .row { grid-template-columns: 100px 1.5fr 1fr 1fr; }
+      .expense-row { 
+        grid-template-columns: 1fr 1fr; 
+        gap: 6px;
+        font-size: 0.8rem; 
+        padding: 8px;
+        background: #f8fafc;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      }
+      .expense-row.header { display: none; }
+      .expense-row input, .expense-row select { padding: 6px; font-size: 0.8rem; }
       .comparison { grid-template-columns: 1fr; }
       .summary-box { grid-template-columns: 1fr; }
       header h1 { font-size: 1.1rem; }
@@ -393,32 +523,25 @@
     <div class="login-box">
       <h1>DOVE FINISCONO I MIEI SOLDI</h1>
       <p id="loginSubtitle">Accedi al tuo account</p>
-      
       <div class="login-error" id="loginError"></div>
       <div class="login-success" id="loginSuccess"></div>
-      
       <div class="form-group">
         <label for="loginEmail">Email</label>
         <input type="email" id="loginEmail" placeholder="tua@email.it" autocomplete="email" />
       </div>
-      
       <div class="form-group">
         <label for="loginPassword">Password</label>
         <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" />
       </div>
-      
       <div class="form-group" id="confirmPasswordGroup" style="display: none;">
         <label for="loginConfirmPassword">Conferma Password</label>
         <input type="password" id="loginConfirmPassword" placeholder="••••••••" autocomplete="new-password" />
       </div>
-      
       <button class="btn" id="loginBtn" onclick="handleLogin()">Accedi</button>
-      
       <div class="toggle-link">
         <span id="toggleText">Non hai un account?</span>
         <a id="toggleLink" onclick="toggleLoginMode()">Registrati</a>
       </div>
-      
       <div class="forgot-link">
         <a onclick="showForgotPassword()">🔑 Password dimenticata?</a>
       </div>
@@ -442,6 +565,79 @@
     </div>
   </div>
 
+  <!-- MODAL BONIFICO/BOLLETTINO -->
+  <div class="modal-overlay" id="bonificoModal">
+    <div class="modal">
+      <h3 style="color: var(--primary);" id="bonificoModalTitle">🏦 Nuovo Bonifico con Rate</h3>
+      <p id="bonificoModalDesc">Hai inserito un IBAN. Vuoi registrare questo come bonifico con rate?</p>
+      <div class="form-group">
+        <label>Beneficiario</label>
+        <input type="text" id="bonBeneficiario" placeholder="Es. Banca Intesa" />
+      </div>
+      <div class="form-group">
+        <label>IBAN / Codice</label>
+        <input type="text" id="bonIban" placeholder="IT00 X000... o Codice Bollettino" />
+      </div>
+      <div class="form-group">
+        <label>Motivazione</label>
+        <input type="text" id="bonMotivazione" placeholder="Es. Mutuo casa, Bolletta Enel" />
+      </div>
+      <div class="form-group">
+        <label>Totale da pagare (€)</label>
+        <input type="number" id="bonTotale" step="0.01" placeholder="0.00" />
+      </div>
+      <div class="form-group">
+        <label>Numero di rate</label>
+        <input type="number" id="bonRate" min="1" placeholder="12" />
+      </div>
+      <div class="login-error" id="bonError" style="margin-top: 10px;"></div>
+      <div class="modal-buttons">
+        <button class="btn secondary" onclick="hideModal('bonificoModal'); cancelLastIban();">Annulla</button>
+        <button class="btn success" onclick="saveBonifico()">💾 Salva</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SPESA DA BONIFICO/BOLLETTINO -->
+  <div class="modal-overlay" id="spesaBonificoModal">
+    <div class="modal">
+      <h3 style="color: var(--primary);" id="spesaModalTitle">💸 Inserisci Spesa</h3>
+      <p id="spesaBonificoInfo"></p>
+      <div class="form-group">
+        <label>Data</label>
+        <input type="date" id="spesaData" />
+      </div>
+      <div class="form-group">
+        <label>Categoria</label>
+        <select id="spesaCategoria"></select>
+      </div>
+      <div class="form-group">
+        <label>Descrizione</label>
+        <input type="text" id="spesaDescrizione" placeholder="Es. Rata mutuo" />
+      </div>
+      <div class="form-group">
+        <label>Importo (€)</label>
+        <input type="number" id="spesaImporto" step="0.01" readonly />
+      </div>
+      <div class="form-group">
+        <label>Frequenza</label>
+        <select id="spesaFrequenza">
+          <option value="Mensile" selected>Mensile</option>
+          <option value="Settimanale">Settimanale</option>
+          <option value="Bimestrale">Bimestrale</option>
+          <option value="Trimestrale">Trimestrale</option>
+          <option value="Semestrale">Semestrale</option>
+          <option value="Annuale">Annuale</option>
+        </select>
+      </div>
+      <div class="login-error" id="spesaBonificoError" style="margin-top: 10px;"></div>
+      <div class="modal-buttons">
+        <button class="btn secondary" onclick="hideModal('spesaBonificoModal')">Annulla</button>
+        <button class="btn success" onclick="saveSpesaDaBonifico()">💾 Salva Spesa</button>
+      </div>
+    </div>
+  </div>
+
   <!-- MAIN APP -->
   <header>
     <h1>DOVE FINISCONO I MIEI SOLDI</h1>
@@ -456,51 +652,31 @@
     <button class="active" data-tab="intro">🏠 Inizio</button>
     <button data-tab="entrate">💰 Entrate</button>
     <button data-tab="spese">💸 Spese</button>
-    <button data-tab="abbonamenti">📱 Abbonamenti</button>
-    <button data-tab="riepilogo"> Riepilogo</button>
+    <button data-tab="abbonamenti">📱 Abbon.</button>
+    <button data-tab="bonifici">🏦 Bonifici</button>
+    <button data-tab="riepilogo">📊 Riepilogo</button>
     <button data-tab="analisi">🔍 Analisi</button>
     <button data-tab="azioni">✅ Azioni</button>
     <button data-tab="checklist">📋 Checklist</button>
-    <button data-tab="impostazioni">️ Impostazioni</button>
+    <button data-tab="impostazioni">⚙️ Impost.</button>
   </nav>
 
   <main>
     <section id="intro" class="tab active">
       <div class="card">
-        <h2> Benvenuto</h2>
-        <p>Questa app ti aiuta a costruire la tua <strong>fotografia finanziaria</strong>: quanto entra, quanto esce e dove finiscono i tuoi soldi. Bastano circa 2 ore in tutto.</p>
+        <h2>👋 Benvenuto</h2>
+        <p>Questa app ti aiuta a costruire la tua <strong>fotografia finanziaria</strong>: quanto entra, quanto esce e dove finiscono i tuoi soldi.</p>
         <div class="info-box" style="margin-top: 14px;">
-          <strong>Cosa ti serve:</strong><br>
-          • Estratti conto degli ultimi 3 mesi<br>
-          • Bollette e polizze assicurative<br>
-          • Una calcolatrice (o questa app che fa i conti per te)
+          <strong>🆕 Novità v2.2:</strong><br>
+          • 🏦 Bonifici con IBAN e rate automatiche<br>
+          • 📄 <strong>Bollettini</strong> con codice e rate automatiche<br>
+          • 🔍 Ricerca intelligente per nome, IBAN o codice bollettino<br>
+          • 💸 Inserimento spese direttamente da bonifici e bollettini<br>
+          • 📅 Data di inserimento per ogni entrata e spesa<br>
+          • 📊 Esportazione settimanale, mensile e annuale
         </div>
-        <h3>I 7 passi</h3>
-        <ol style="margin-left: 20px; font-size: 0.9rem;">
-          <li>Le tue entrate nette</li>
-          <li>Le spese fisse</li>
-          <li>Le spese variabili</li>
-          <li>La caccia agli abbonamenti</li>
-          <li>La tua fotografia: i totali</li>
-          <li>Dove finiscono davvero i tuoi soldi?</li>
-          <li>Le tue 3 azioni</li>
-        </ol>
         <div class="btn-row">
           <button class="btn" onclick="switchTab('entrate')">Inizia dalle Entrate →</button>
-        </div>
-      </div>
-      <div class="card">
-        <h2>💡 Regola d'oro</h2>
-        <p style="font-size: 0.9rem;">Usa i <strong>movimenti reali</strong> del conto, non la memoria: quasi tutti sottostimano le spese piccole e ripetute. Arrotonda all'euro: conta l'ordine di grandezza, non il centesimo.</p>
-      </div>
-      <div class="card">
-        <h2>🔄 Come convertire in mensile</h2>
-        <div style="font-size: 0.85rem;">
-          <p><strong>Settimanale:</strong> importo × 52 ÷ 12</p>
-          <p><strong>Bimestrale:</strong> importo  2</p>
-          <p><strong>Trimestrale:</strong> importo ÷ 3</p>
-          <p><strong>Semestrale:</strong> importo ÷ 6</p>
-          <p><strong>Annuale:</strong> importo ÷ 12</p>
         </div>
       </div>
     </section>
@@ -508,8 +684,9 @@
     <section id="entrate" class="tab">
       <div class="card">
         <h2>💰 Le tue entrate nette</h2>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Solo importi NETTI, cioè quello che arriva davvero sul conto.</p>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Solo importi NETTI. Inserisci la data di ogni entrata.</p>
         <div class="row header">
+          <div>Data</div>
           <div>Voce</div>
           <div>Importo (€)</div>
           <div>Frequenza</div>
@@ -534,12 +711,15 @@
     <section id="spese" class="tab">
       <div class="card">
         <h2>💸 Le tue spese</h2>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Elenca tutto quello che esce. Il mensile si calcola da solo.</p>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Inserisci data e, se è un bonifico o bollettino, compila i campi. Le rate si scalano automaticamente!</p>
         <div class="expense-row header">
+          <div>Data</div>
           <div>Categoria</div>
           <div>Voce</div>
-          <div>Importo (€)</div>
-          <div>Frequenza</div>
+          <div>Importo</div>
+          <div>Freq.</div>
+          <div>IBAN</div>
+          <div>Bollettino</div>
           <div></div>
         </div>
         <div id="spese-list"></div>
@@ -562,12 +742,15 @@
     <section id="abbonamenti" class="tab">
       <div class="card">
         <h2>📱 La caccia agli abbonamenti</h2>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Streaming, app, palestra, cloud, giornali, rinnovi automatici: spesso pesano più di quanto pensi.</p>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Streaming, app, palestra, cloud, giornali, rinnovi automatici.</p>
         <div class="expense-row header">
+          <div>Data</div>
           <div>Categoria</div>
           <div>Abbonamento</div>
-          <div>Costo (€)</div>
-          <div>Frequenza</div>
+          <div>Costo</div>
+          <div>Freq.</div>
+          <div>IBAN</div>
+          <div>Bollettino</div>
           <div></div>
         </div>
         <div id="abbonamenti-list"></div>
@@ -580,18 +763,91 @@
             <div class="value" id="tot-abbonamenti">€ 0</div>
           </div>
         </div>
-        <div class="info-box" style="margin-top: 12px;">
-          <strong>Per ogni abbonamento chiediti:</strong><br>
-          • Negli ultimi 30 giorni l'ho usato davvero?<br>
-          • Lo riattiverei oggi, se l'avessi già disdetto?<br>
-          • Posso condividerlo o scegliere un piano più economico?
+      </div>
+    </section>
+
+    <section id="bonifici" class="tab">
+      <div class="card">
+        <h2>🏦 Bonifici e Bollettini con Rate</h2>
+        <div class="info-box">
+          <strong>💡 Come funziona:</strong><br>
+          • Crea un bonifico (IBAN) o bollettino con totale e rate<br>
+          • Quando inserisci una spesa con quell'IBAN/codice, la rata si scala automaticamente<br>
+          • 🔍 Usa la ricerca per trovare rapidamente e inserire spese direttamente da qui!
+        </div>
+
+        <div class="tab-toggle">
+          <button class="active-bon" id="toggleBon" onclick="showSubTab('bon')">🏦 Bonifici IBAN</button>
+          <button id="toggleBol" onclick="showSubTab('bol')">📄 Bollettini</button>
+        </div>
+
+        <!-- BONIFICI -->
+        <div id="subTabBon">
+          <div class="search-box">
+            <label>🔍 Cerca bonifico per nome o IBAN</label>
+            <input type="text" id="searchBonifici" placeholder="Es. Mutuo, Intesa, IT60X..." oninput="searchBonifici()" />
+            <div id="searchResultsBon" class="search-results"></div>
+          </div>
+          <div id="bonifici-list"></div>
+          <div class="btn-row">
+            <button class="btn small" onclick="showAddBonificoModal('iban')">+ Aggiungi Bonifico</button>
+          </div>
+          <div class="summary-box" style="margin-top: 16px;">
+            <div class="summary-item">
+              <div class="label">Bonifici attivi</div>
+              <div class="value" id="tot-bonifici-attivi">0</div>
+            </div>
+            <div class="summary-item">
+              <div class="label">Rate rimanenti</div>
+              <div class="value" id="tot-rate-rimanenti">0</div>
+            </div>
+            <div class="summary-item">
+              <div class="label">Già pagato</div>
+              <div class="value positive" id="tot-pagato">€ 0</div>
+            </div>
+            <div class="summary-item">
+              <div class="label">Rimanenza</div>
+              <div class="value negative" id="tot-rimanente">€ 0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOLLETTINI -->
+        <div id="subTabBol" style="display:none">
+          <div class="search-box">
+            <label>🔍 Cerca bollettino per nome o codice</label>
+            <input type="text" id="searchBollettini" placeholder="Es. Enel, 123456789..." oninput="searchBollettini()" />
+            <div id="searchResultsBol" class="search-results"></div>
+          </div>
+          <div id="bollettini-list"></div>
+          <div class="btn-row">
+            <button class="btn small" onclick="showAddBonificoModal('bollettino')">+ Aggiungi Bollettino</button>
+          </div>
+          <div class="summary-box" style="margin-top: 16px;">
+            <div class="summary-item">
+              <div class="label">Bollettini attivi</div>
+              <div class="value" id="tot-bollettini-attivi">0</div>
+            </div>
+            <div class="summary-item">
+              <div class="label">Rate rimanenti</div>
+              <div class="value" id="tot-bol-rate-rimanenti">0</div>
+            </div>
+            <div class="summary-item">
+              <div class="label">Già pagato</div>
+              <div class="value positive" id="tot-bol-pagato">€ 0</div>
+            </div>
+            <div class="summary-item">
+              <div class="label">Rimanenza</div>
+              <div class="value negative" id="tot-bol-rimanente">€ 0</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="riepilogo" class="tab">
       <div class="card">
-        <h2> La tua fotografia</h2>
+        <h2>📊 La tua fotografia</h2>
         <div class="summary-box">
           <div class="summary-item">
             <div class="label">Entrate</div>
@@ -663,17 +919,21 @@
           <h3>1. Scegli il periodo</h3>
           <div class="radio-group">
             <label>
+              <input type="radio" name="export-period" value="settimanale" />
+              <span>📅 Settimanale</span>
+            </label>
+            <label>
               <input type="radio" name="export-period" value="mensile" checked />
-              <span>📅 Mensile</span>
+              <span>📆 Mensile</span>
             </label>
             <label>
               <input type="radio" name="export-period" value="annuale" />
-              <span>📆 Annuale</span>
+              <span>📇 Annuale</span>
             </label>
           </div>
           <h3>2. Scegli il formato</h3>
           <div class="export-buttons">
-            <button class="btn accent" onclick="exportHTML()"> HTML</button>
+            <button class="btn accent" onclick="exportHTML()">🌐 HTML</button>
             <button class="btn secondary" onclick="exportTXT()">📄 TXT</button>
             <button class="btn success" onclick="exportPDF()">📕 PDF</button>
           </div>
@@ -711,7 +971,7 @@
     <section id="azioni" class="tab">
       <div class="card">
         <h2>✅ Le tue 3 azioni</h2>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Scegli al massimo tre cambiamenti concreti per il prossimo mese. Meglio pochi e fatti che tanti e dimenticati.</p>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Scegli al massimo tre cambiamenti concreti per il prossimo mese.</p>
         <div class="action-row header" style="display: grid; grid-template-columns: 2fr 1fr 1fr 30px; font-size: 0.75rem; text-transform: uppercase; color: var(--muted); font-weight: 600; padding-bottom: 4px; border-bottom: 1px solid var(--border); margin-bottom: 8px;">
           <div>Azione concreta</div>
           <div>Risparmio stimato (€/mese)</div>
@@ -727,14 +987,6 @@
             <div class="label">Risparmio totale stimato</div>
             <div class="value positive" id="tot-azioni">€ 0</div>
           </div>
-        </div>
-        <div class="warning-box" style="margin-top: 12px;">
-          <strong>Idee per partire:</strong><br>
-          • Disdire un abbonamento che non usi<br>
-          • Confrontare offerte luce/gas/internet<br>
-          • Fissare un tetto settimanale per ristoranti/delivery<br>
-          • Fare la spesa con lista e importo massimo<br>
-          • Mettere da parte una cifra fissa il giorno dello stipendio
         </div>
       </div>
     </section>
@@ -762,7 +1014,6 @@
         <div class="cloud-section">
           <h3>☁️ Sincronizzazione Cloud</h3>
           <p style="font-size: 0.85rem; margin-bottom: 12px;">I tuoi dati sono salvati automaticamente nel cloud associati al tuo account.</p>
-
           <div class="cloud-status-box">
             <div class="cloud-status-dot"></div>
             <div>
@@ -770,12 +1021,10 @@
               <div class="sync-info" id="cloudStatusInfo">Email: <span id="cloudEmail">—</span></div>
             </div>
           </div>
-
           <div class="btn-row">
             <button class="btn success" onclick="saveToCloud()">💾 Salva ora</button>
-            <button class="btn accent" onclick="loadFromCloud()"> Carica dal cloud</button>
+            <button class="btn accent" onclick="loadFromCloud()">📥 Carica dal cloud</button>
           </div>
-
           <div class="info-box" style="margin-top: 12px;">
             <strong>Auto-salvataggio:</strong> i dati vengono salvati automaticamente nel cloud ogni volta che modifichi qualcosa.
           </div>
@@ -785,24 +1034,28 @@
         <p style="font-size: 0.85rem; margin: 8px 0;">Esporta il riepilogo completo in diversi formati.</p>
         <div class="radio-group">
           <label>
+            <input type="radio" name="export-period-2" value="settimanale" />
+            <span>📅 Settimanale</span>
+          </label>
+          <label>
             <input type="radio" name="export-period-2" value="mensile" checked />
-            <span>📅 Vista mensile</span>
+            <span>📆 Mensile</span>
           </label>
           <label>
             <input type="radio" name="export-period-2" value="annuale" />
-            <span> Vista annuale</span>
+            <span>📇 Annuale</span>
           </label>
         </div>
         <div class="export-buttons">
           <button class="btn accent" onclick="exportHTML('impostazioni')">🌐 HTML</button>
           <button class="btn secondary" onclick="exportTXT('impostazioni')">📄 TXT</button>
-          <button class="btn success" onclick="exportPDF('impostazioni')"> PDF</button>
+          <button class="btn success" onclick="exportPDF('impostazioni')">📕 PDF</button>
         </div>
 
         <h3 style="margin-top: 24px;">💾 Backup locale</h3>
         <p style="font-size: 0.85rem; margin: 8px 0;">Salva o ripristina tutti i dati in un file JSON.</p>
         <div class="btn-row">
-          <button class="btn secondary" onclick="exportJSON()"> Esporta JSON</button>
+          <button class="btn secondary" onclick="exportJSON()">📤 Esporta JSON</button>
           <label class="btn secondary" style="cursor: pointer;">
             📥 Importa JSON
             <input type="file" accept=".json" onchange="importJSON(event)" style="display: none;" />
@@ -814,7 +1067,7 @@
           <strong>Attenzione:</strong> queste azioni cancelleranno i tuoi dati. L'operazione non può essere annullata.
         </div>
         <div class="btn-row">
-          <button class="btn danger" onclick="showDeleteLocalModal()">️ Cancella dati locali</button>
+          <button class="btn danger" onclick="showDeleteLocalModal()">🗑️ Cancella dati locali</button>
           <button class="btn danger" onclick="showDeleteCloudModal()">☁️ Cancella dati dal cloud</button>
         </div>
 
@@ -826,9 +1079,14 @@
         <h3 style="margin-top: 24px;">ℹ️ Informazioni</h3>
         <div class="info-box">
           <strong>DOVE FINISCONO I MIEI SOLDI</strong><br>
-          Versione 1.9 (icone SVG inline)<br>
+          Versione 2.2 (bonifici + bollettini)<br>
           🔐 Sessione automatica: quando chiudi l'app, devi fare nuovamente il login.<br>
-          🔑 Recupero password disponibile nella schermata di accesso.<br><br>
+          🔑 Recupero password disponibile nella schermata di accesso.<br>
+          🏦 Gestione bonifici e bollettini con rate automatiche.<br>
+          🔍 Ricerca intelligente per nome, IBAN o codice.<br>
+          💸 Inserimento spese direttamente da bonifici/bollettini.<br>
+          📅 Data di inserimento per ogni entrata e spesa.<br>
+          📊 Esportazione settimanale, mensile e annuale.<br><br>
           Strumento educativo: non è consulenza finanziaria e non promette guadagni.
         </div>
       </div>
@@ -881,6 +1139,9 @@
     let firebaseApp, firebaseAuth, firebaseDb;
     let currentUser = null;
     let isLoginMode = true;
+    let lastIbanSpesaId = null;
+    let selectedBonificoForSpesa = null;
+    let currentModalType = 'iban'; // 'iban' o 'bollettino'
 
     try {
       firebaseApp = firebase.initializeApp(firebaseConfig);
@@ -1060,16 +1321,18 @@
     async function logout() {
       if (confirm('Vuoi davvero uscire dall\'account? Dovrai reinserire email e password al prossimo accesso.')) {
         await firebaseAuth.signOut();
-        showToast(' Disconnesso', 'success');
+        showToast('👋 Disconnesso', 'success');
       }
     }
 
     // ============ STATO ============
-    const STORAGE_KEY = 'doveFinisconoMieiSoldi_v1';
+    const STORAGE_KEY = 'doveFinisconoMieiSoldi_v2';
     let state = {
       entrate: [],
       spese: [],
       abbonamenti: [],
+      bonifici: [],
+      bollettini: [],
       azioni: [],
       domande: {},
       checklist: {}
@@ -1092,7 +1355,7 @@
     };
 
     const FREQUENZE = {
-      'Settimanale': 4.3333, 'Mensile': 1, 'Bimestrale': 0.5,
+      'Giornaliero': 30.4375, 'Settimanale': 4.3333, 'Mensile': 1, 'Bimestrale': 0.5,
       'Trimestrale': 0.3333, 'Semestrale': 0.1667, 'Annuale': 0.0833
     };
 
@@ -1107,7 +1370,7 @@
         'Inserisci le spese fisse: casa, bollette, rate, assicurazioni',
         'Inserisci le spese variabili guardando i movimenti reali',
         'Elenca tutti gli abbonamenti, anche quelli dimenticati',
-        'Aggiungi le spese annuali con frequenza Annuale',
+        'Registra i bonifici e bollettini con rate',
         'Controlla che in Riepilogo i conti tornino'
       ]},
       { section: "L'ANALISI", items: [
@@ -1145,6 +1408,8 @@
       if (!state.entrate) state.entrate = [];
       if (!state.spese) state.spese = [];
       if (!state.abbonamenti) state.abbonamenti = [];
+      if (!state.bonifici) state.bonifici = [];
+      if (!state.bollettini) state.bollettini = [];
       if (!state.azioni) state.azioni = [];
       if (!state.domande) state.domande = {};
       if (!state.checklist) state.checklist = {};
@@ -1157,6 +1422,11 @@
       return (parseFloat(amount) || 0) * (FREQUENZE[freq] || 1);
     }
     function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+    function todayStr() { return new Date().toISOString().split('T')[0]; }
+    function maskIban(iban) {
+      if (!iban || iban.length < 8) return iban || '';
+      return iban.substring(0, 4) + '****' + iban.substring(iban.length - 4);
+    }
 
     function showToast(message, type = '') {
       const toast = document.getElementById('toast');
@@ -1179,20 +1449,29 @@
     function showDeleteLocalModal() { showModal('deleteLocalModal'); }
     function showDeleteCloudModal() { showModal('deleteCloudModal'); }
 
+    function showSubTab(t) {
+      document.getElementById('subTabBon').style.display = t === 'bon' ? 'block' : 'none';
+      document.getElementById('subTabBol').style.display = t === 'bol' ? 'block' : 'none';
+      document.getElementById('toggleBon').className = t === 'bon' ? 'active-bon' : '';
+      document.getElementById('toggleBol').className = t === 'bol' ? 'active-bol' : '';
+    }
+
     function switchTab(id) {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.add('active');
       document.querySelector(`nav button[data-tab="${id}"]`).classList.add('active');
       if (id === 'riepilogo') renderRiepilogo();
+      if (id === 'bonifici') { renderBonifici(); renderBollettini(); }
       window.scrollTo({top: 0, behavior: 'smooth'});
     }
     document.querySelectorAll('nav button').forEach(btn => {
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
+    // ============ ENTRATE ============
     function addEntrata() {
-      state.entrate.push({ id: uid(), voce: '', importo: '', frequenza: 'Mensile' });
+      state.entrate.push({ id: uid(), voce: '', importo: '', frequenza: 'Mensile', data: todayStr() });
       save(); renderEntrate();
     }
     function removeEntrata(id) {
@@ -1210,6 +1489,7 @@
       } else {
         list.innerHTML = state.entrate.map(e => `
           <div class="row">
+            <input type="date" value="${e.data || todayStr()}" onchange="updateEntrata('${e.id}','data',this.value)" />
             <input type="text" placeholder="Es. Stipendio" value="${e.voce}" onchange="updateEntrata('${e.id}','voce',this.value)" />
             <input type="number" step="0.01" placeholder="0" value="${e.importo}" onchange="updateEntrata('${e.id}','importo',this.value)" />
             <select onchange="updateEntrata('${e.id}','frequenza',this.value)">
@@ -1223,8 +1503,9 @@
       document.getElementById('tot-entrate-annuali').textContent = fmt(tot * 12);
     }
 
+    // ============ SPESE ============
     function addSpesa() {
-      state.spese.push({ id: uid(), categoria: 'Casa', voce: '', importo: '', frequenza: 'Mensile' });
+      state.spese.push({ id: uid(), categoria: 'Casa', voce: '', importo: '', frequenza: 'Mensile', data: todayStr(), iban: '', bollettino: '' });
       save(); renderSpese();
     }
     function removeSpesa(id) {
@@ -1233,34 +1514,407 @@
     }
     function updateSpesa(id, field, value) {
       const s = state.spese.find(x => x.id === id);
-      if (s) { s[field] = value; save(); renderSpese(); }
+      if (s) { 
+        s[field] = value; 
+        save(); 
+        renderSpese();
+        if (field === 'iban' && value.trim()) checkIbanForBonifico(id, value.trim());
+        if (field === 'bollettino' && value.trim()) checkBollettinoForSpesa(id, value.trim());
+      }
     }
     function renderSpese() {
       const list = document.getElementById('spese-list');
       if (state.spese.length === 0) {
         list.innerHTML = '<div class="empty-state">Nessuna spesa. Clicca "+ Aggiungi spesa" per iniziare.</div>';
       } else {
-        list.innerHTML = state.spese.map(s => `
-          <div class="expense-row">
-            <select onchange="updateSpesa('${s.id}','categoria',this.value)">
-              ${CATEGORIE.map(c => `<option ${s.categoria===c?'selected':''}>${c}</option>`).join('')}
-            </select>
-            <input type="text" placeholder="Descrizione" value="${s.voce}" onchange="updateSpesa('${s.id}','voce',this.value)" />
-            <input type="number" step="0.01" placeholder="0" value="${s.importo}" onchange="updateSpesa('${s.id}','importo',this.value)" />
-            <select onchange="updateSpesa('${s.id}','frequenza',this.value)">
-              ${Object.keys(FREQUENZE).map(f => `<option ${s.frequenza===f?'selected':''}>${f}</option>`).join('')}
-            </select>
-            <button class="remove-btn" onclick="removeSpesa('${s.id}')">×</button>
-          </div>
-        `).join('');
+        list.innerHTML = state.spese.map(s => {
+          const bonifico = s.bonificoId ? state.bonifici.find(b => b.id === s.bonificoId) : null;
+          const bollettino = s.bollettinoId ? state.bollettini.find(b => b.id === s.bollettinoId) : null;
+          const ref = bonifico || bollettino;
+          let rataInfo = '';
+          if (ref) {
+            const rimanenti = ref.numRate - ref.ratePagate;
+            const pagato = ref.ratePagate * ref.importoRata;
+            const rimanenza = ref.totale - pagato;
+            rataInfo = `
+              <div class="rata-info">
+                <strong>✅ Rata ${ref.ratePagate} di ${ref.numRate} pagata</strong> - ${ref.beneficiario}
+                <div class="rata-details">
+                  <div class="rata-item"><div class="label">Rate rimanenti</div><div class="value">${rimanenti}</div></div>
+                  <div class="rata-item"><div class="label">Totale pagato</div><div class="value">${fmt(pagato)}</div></div>
+                  <div class="rata-item"><div class="label">Rimanenza</div><div class="value">${fmt(rimanenza)}</div></div>
+                  <div class="rata-item"><div class="label">Importo rata</div><div class="value">${fmt(ref.importoRata)}</div></div>
+                </div>
+              </div>
+            `;
+          }
+          return `
+            <div>
+              <div class="expense-row">
+                <input type="date" value="${s.data || todayStr()}" onchange="updateSpesa('${s.id}','data',this.value)" />
+                <select onchange="updateSpesa('${s.id}','categoria',this.value)">
+                  ${CATEGORIE.map(c => `<option ${s.categoria===c?'selected':''}>${c}</option>`).join('')}
+                </select>
+                <input type="text" placeholder="Descrizione" value="${s.voce}" onchange="updateSpesa('${s.id}','voce',this.value)" />
+                <input type="number" step="0.01" placeholder="0" value="${s.importo}" onchange="updateSpesa('${s.id}','importo',this.value)" />
+                <select onchange="updateSpesa('${s.id}','frequenza',this.value)">
+                  ${Object.keys(FREQUENZE).map(f => `<option ${s.frequenza===f?'selected':''}>${f}</option>`).join('')}
+                </select>
+                <input type="text" placeholder="IBAN" value="${s.iban || ''}" onchange="updateSpesa('${s.id}','iban',this.value)" style="font-size: 0.75rem;" />
+                <input type="text" placeholder="Bollettino" value="${s.bollettino || ''}" onchange="updateSpesa('${s.id}','bollettino',this.value)" style="font-size: 0.75rem;" />
+                <button class="remove-btn" onclick="removeSpesa('${s.id}')">×</button>
+              </div>
+              ${rataInfo}
+            </div>
+          `;
+        }).join('');
       }
       const tot = state.spese.reduce((s, e) => s + toMonthly(e.importo, e.frequenza), 0);
       document.getElementById('tot-spese').textContent = fmt(tot);
       document.getElementById('tot-spese-annuali').textContent = fmt(tot * 12);
     }
 
+    // ============ LOGICA BONIFICI E BOLLETTINI ============
+    function checkIbanForBonifico(spesaId, iban) {
+      const ibanNorm = iban.replace(/\s/g, '').toUpperCase();
+      const bonificoEsistente = state.bonifici.find(b => b.iban.replace(/\s/g, '').toUpperCase() === ibanNorm);
+      
+      if (bonificoEsistente) {
+        if (bonificoEsistente.ratePagate < bonificoEsistente.numRate) {
+          bonificoEsistente.ratePagate++;
+          const spesa = state.spese.find(s => s.id === spesaId);
+          if (spesa) { spesa.bonificoId = bonificoEsistente.id; spesa.isRata = true; }
+          save(); renderSpese();
+          showToast(`✅ Rata ${bonificoEsistente.ratePagate}/${bonificoEsistente.numRate} scalata automaticamente!`, 'success');
+        } else {
+          showToast('⚠️ Questo bonifico ha già completato tutte le rate!', 'error');
+        }
+      } else {
+        lastIbanSpesaId = spesaId;
+        currentModalType = 'iban';
+        document.getElementById('bonificoModalTitle').textContent = '🏦 Nuovo Bonifico con Rate';
+        document.getElementById('bonificoModalDesc').textContent = 'Hai inserito un IBAN. Vuoi registrarlo come bonifico con rate?';
+        document.getElementById('bonBeneficiario').value = '';
+        document.getElementById('bonIban').value = iban;
+        document.getElementById('bonMotivazione').value = '';
+        document.getElementById('bonTotale').value = '';
+        document.getElementById('bonRate').value = '';
+        document.getElementById('bonError').classList.remove('show');
+        showModal('bonificoModal');
+      }
+    }
+
+    function checkBollettinoForSpesa(spesaId, codice) {
+      const norm = codice.replace(/\s/g, '').toUpperCase();
+      const bollettinoEsistente = state.bollettini.find(b => b.codice.replace(/\s/g, '').toUpperCase() === norm);
+      
+      if (bollettinoEsistente) {
+        if (bollettinoEsistente.ratePagate < bollettinoEsistente.numRate) {
+          bollettinoEsistente.ratePagate++;
+          const spesa = state.spese.find(s => s.id === spesaId);
+          if (spesa) { spesa.bollettinoId = bollettinoEsistente.id; spesa.isRata = true; }
+          save(); renderSpese();
+          showToast(`✅ Rata ${bollettinoEsistente.ratePagate}/${bollettinoEsistente.numRate} scalata automaticamente!`, 'success');
+        } else {
+          showToast('⚠️ Questo bollettino ha già completato tutte le rate!', 'error');
+        }
+      } else {
+        lastIbanSpesaId = spesaId;
+        currentModalType = 'bollettino';
+        document.getElementById('bonificoModalTitle').textContent = '📄 Nuovo Bollettino con Rate';
+        document.getElementById('bonificoModalDesc').textContent = 'Hai inserito un codice bollettino. Vuoi registrarlo con rate?';
+        document.getElementById('bonBeneficiario').value = '';
+        document.getElementById('bonIban').value = codice;
+        document.getElementById('bonMotivazione').value = '';
+        document.getElementById('bonTotale').value = '';
+        document.getElementById('bonRate').value = '';
+        document.getElementById('bonError').classList.remove('show');
+        showModal('bonificoModal');
+      }
+    }
+
+    function cancelLastIban() {
+      if (lastIbanSpesaId) {
+        const spesa = state.spese.find(s => s.id === lastIbanSpesaId);
+        if (spesa) {
+          spesa.iban = '';
+          spesa.bollettino = '';
+          save();
+          renderSpese();
+        }
+        lastIbanSpesaId = null;
+      }
+    }
+
+    function showAddBonificoModal(type) {
+      lastIbanSpesaId = null;
+      currentModalType = type;
+      document.getElementById('bonificoModalTitle').textContent = type === 'iban' ? '🏦 Nuovo Bonifico con Rate' : '📄 Nuovo Bollettino con Rate';
+      document.getElementById('bonificoModalDesc').textContent = type === 'iban' ? 'Inserisci i dati del bonifico:' : 'Inserisci i dati del bollettino:';
+      document.getElementById('bonBeneficiario').value = '';
+      document.getElementById('bonIban').value = '';
+      document.getElementById('bonMotivazione').value = '';
+      document.getElementById('bonTotale').value = '';
+      document.getElementById('bonRate').value = '';
+      document.getElementById('bonError').classList.remove('show');
+      showModal('bonificoModal');
+    }
+
+    function saveBonifico() {
+      const beneficiario = document.getElementById('bonBeneficiario').value.trim();
+      const codice = document.getElementById('bonIban').value.trim();
+      const motivazione = document.getElementById('bonMotivazione').value.trim();
+      const totale = parseFloat(document.getElementById('bonTotale').value);
+      const numRate = parseInt(document.getElementById('bonRate').value);
+      const errorEl = document.getElementById('bonError');
+      
+      if (!beneficiario || !codice || !motivazione || !totale || !numRate) {
+        errorEl.textContent = 'Compila tutti i campi';
+        errorEl.classList.add('show');
+        return;
+      }
+      if (numRate < 1) {
+        errorEl.textContent = 'Il numero di rate deve essere almeno 1';
+        errorEl.classList.add('show');
+        return;
+      }
+      
+      const importoRata = totale / numRate;
+      const obj = {
+        id: uid(),
+        beneficiario,
+        iban: currentModalType === 'iban' ? codice : '',
+        codice: currentModalType === 'bollettino' ? codice : '',
+        motivazione,
+        totale,
+        numRate,
+        ratePagate: 0,
+        importoRata,
+        dataInizio: todayStr()
+      };
+      
+      if (currentModalType === 'iban') state.bonifici.push(obj);
+      else state.bollettini.push(obj);
+      
+      if (lastIbanSpesaId) {
+        const spesa = state.spese.find(s => s.id === lastIbanSpesaId);
+        if (spesa) {
+          if (currentModalType === 'iban') { spesa.bonificoId = obj.id; spesa.isRata = true; }
+          else { spesa.bollettinoId = obj.id; spesa.isRata = true; }
+          obj.ratePagate = 1;
+        }
+        lastIbanSpesaId = null;
+      }
+      
+      save();
+      hideModal('bonificoModal');
+      renderSpese();
+      renderBonifici();
+      renderBollettini();
+      showToast('✅ Salvato con successo!', 'success');
+    }
+
+    function removeBonifico(id) {
+      if (!confirm('Eliminare questo bonifico? Le spese collegate manterranno il loro IBAN ma non saranno più collegate.')) return;
+      state.bonifici = state.bonifici.filter(b => b.id !== id);
+      state.spese.forEach(s => { if (s.bonificoId === id) { s.bonificoId = null; s.isRata = false; } });
+      save(); renderBonifici(); renderSpese();
+      showToast('🗑️ Bonifico eliminato', 'success');
+    }
+
+    function removeBollettino(id) {
+      if (!confirm('Eliminare questo bollettino? Le spese collegate manterranno il loro codice ma non saranno più collegate.')) return;
+      state.bollettini = state.bollettini.filter(b => b.id !== id);
+      state.spese.forEach(s => { if (s.bollettinoId === id) { s.bollettinoId = null; s.isRata = false; } });
+      save(); renderBollettini(); renderSpese();
+      showToast('🗑️ Bollettino eliminato', 'success');
+    }
+
+    // ============ RICERCA ============
+    function searchBonifici() {
+      const query = document.getElementById('searchBonifici').value.trim().toLowerCase();
+      const resultsDiv = document.getElementById('searchResultsBon');
+      if (!query) { resultsDiv.innerHTML = ''; return; }
+      const results = state.bonifici.filter(b => b.beneficiario.toLowerCase().includes(query) || b.iban.toLowerCase().includes(query) || b.motivazione.toLowerCase().includes(query));
+      resultsDiv.innerHTML = results.length ? results.map(b => `
+        <div class="search-result-item" onclick="openSpesaFromRef('${b.id}','iban')">
+          <div class="result-title">${b.ratePagate >= b.numRate ? '✅' : '🏦'} ${b.beneficiario}</div>
+          <div class="result-details">IBAN: ${maskIban(b.iban)} | Rate: ${b.ratePagate}/${b.numRate} | Rimanenza: ${fmt(b.totale - (b.ratePagate * b.importoRata))}</div>
+        </div>
+      `).join('') : '<div style="padding: 12px; color: var(--muted); font-style: italic;">Nessun bonifico trovato</div>';
+    }
+
+    function searchBollettini() {
+      const query = document.getElementById('searchBollettini').value.trim().toLowerCase();
+      const resultsDiv = document.getElementById('searchResultsBol');
+      if (!query) { resultsDiv.innerHTML = ''; return; }
+      const results = state.bollettini.filter(b => b.beneficiario.toLowerCase().includes(query) || b.codice.toLowerCase().includes(query) || b.motivazione.toLowerCase().includes(query));
+      resultsDiv.innerHTML = results.length ? results.map(b => `
+        <div class="search-result-item" onclick="openSpesaFromRef('${b.id}','bollettino')">
+          <div class="result-title">${b.ratePagate >= b.numRate ? '✅' : '📄'} ${b.beneficiario}</div>
+          <div class="result-details">Codice: ${maskIban(b.codice)} | Rate: ${b.ratePagate}/${b.numRate} | Rimanenza: ${fmt(b.totale - (b.ratePagate * b.importoRata))}</div>
+        </div>
+      `).join('') : '<div style="padding: 12px; color: var(--muted); font-style: italic;">Nessun bollettino trovato</div>';
+    }
+
+    function openSpesaFromRef(refId, type) {
+      const ref = type === 'iban' ? state.bonifici.find(b => b.id === refId) : state.bollettini.find(b => b.id === refId);
+      if (!ref) return;
+      if (ref.ratePagate >= ref.numRate) {
+        showToast('⚠️ Rate completate!', 'error');
+        return;
+      }
+      selectedBonificoForSpesa = { ...ref, _type: type };
+      document.getElementById('spesaModalTitle').textContent = type === 'iban' ? '💸 Spesa da Bonifico' : '💸 Spesa da Bollettino';
+      document.getElementById('spesaBonificoInfo').innerHTML = `
+        <strong>${ref.beneficiario}</strong><br>
+        ${type === 'iban' ? 'IBAN' : 'Codice'}: ${maskIban(ref.codice || ref.iban)}<br>
+        Rate rimanenti: ${ref.numRate - ref.ratePagate}
+      `;
+      document.getElementById('spesaData').value = todayStr();
+      const sel = document.getElementById('spesaCategoria');
+      sel.innerHTML = CATEGORIE.map(c => `<option value="${c}" ${c === 'Debiti e finanziamenti' ? 'selected' : ''}>${c}</option>`).join('');
+      document.getElementById('spesaDescrizione').value = ref.motivazione;
+      document.getElementById('spesaImporto').value = ref.importoRata.toFixed(2);
+      document.getElementById('spesaFrequenza').value = 'Mensile';
+      document.getElementById('spesaBonificoError').classList.remove('show');
+      showModal('spesaBonificoModal');
+    }
+
+    function saveSpesaDaBonifico() {
+      if (!selectedBonificoForSpesa) return;
+      const data = document.getElementById('spesaData').value;
+      const categoria = document.getElementById('spesaCategoria').value;
+      const descrizione = document.getElementById('spesaDescrizione').value.trim();
+      const importo = parseFloat(document.getElementById('spesaImporto').value);
+      const frequenza = document.getElementById('spesaFrequenza').value;
+      const errorEl = document.getElementById('spesaBonificoError');
+      
+      if (!data || !descrizione || !importo) {
+        errorEl.textContent = 'Compila tutti i campi obbligatori';
+        errorEl.classList.add('show');
+        return;
+      }
+      
+      const spesa = {
+        id: uid(),
+        data,
+        categoria,
+        voce: descrizione,
+        importo: importo.toFixed(2),
+        frequenza,
+        iban: selectedBonificoForSpesa._type === 'iban' ? (selectedBonificoForSpesa.iban || selectedBonificoForSpesa.codice) : '',
+        bollettino: selectedBonificoForSpesa._type === 'bollettino' ? (selectedBonificoForSpesa.codice || selectedBonificoForSpesa.iban) : '',
+        isRata: true
+      };
+      
+      if (selectedBonificoForSpesa._type === 'iban') {
+        spesa.bonificoId = selectedBonificoForSpesa.id;
+        const ref = state.bonifici.find(b => b.id === selectedBonificoForSpesa.id);
+        if (ref) ref.ratePagate++;
+      } else {
+        spesa.bollettinoId = selectedBonificoForSpesa.id;
+        const ref = state.bollettini.find(b => b.id === selectedBonificoForSpesa.id);
+        if (ref) ref.ratePagate++;
+      }
+      
+      state.spese.push(spesa);
+      save();
+      hideModal('spesaBonificoModal');
+      selectedBonificoForSpesa = null;
+      renderSpese();
+      renderBonifici();
+      renderBollettini();
+      showToast('✅ Spesa aggiunta e rata scalata!', 'success');
+    }
+
+    function renderBonifici() {
+      const list = document.getElementById('bonifici-list');
+      if (state.bonifici.length === 0) {
+        list.innerHTML = '<div class="empty-state">Nessun bonifico registrato. Usa la ricerca sopra o clicca "+ Aggiungi Bonifico".</div>';
+      } else {
+        list.innerHTML = state.bonifici.map(b => {
+          const rimanenti = b.numRate - b.ratePagate;
+          const pagato = b.ratePagate * b.importoRata;
+          const rimanenza = b.totale - pagato;
+          const percentuale = (b.ratePagate / b.numRate) * 100;
+          const completato = b.ratePagate >= b.numRate;
+          return `
+            <div class="bonifico-card" style="${completato ? 'background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: var(--success);' : ''}">
+              <h4>${completato ? '✅' : '🏦'} ${b.beneficiario} ${completato ? '(COMPLETATO)' : ''}</h4>
+              <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 8px;">
+                <strong>IBAN:</strong> ${maskIban(b.iban)} | <strong>Motivazione:</strong> ${b.motivazione}
+              </div>
+              <div class="bonifico-details">
+                <div class="detail-item"><div class="label">Totale</div><div class="value">${fmt(b.totale)}</div></div>
+                <div class="detail-item"><div class="label">Rata</div><div class="value">${fmt(b.importoRata)}</div></div>
+                <div class="detail-item"><div class="label">Pagate</div><div class="value">${b.ratePagate}/${b.numRate}</div></div>
+                <div class="detail-item"><div class="label">Rimanenti</div><div class="value">${rimanenti}</div></div>
+                <div class="detail-item"><div class="label">Pagato</div><div class="value" style="color: var(--success);">${fmt(pagato)}</div></div>
+                <div class="detail-item"><div class="label">Rimanenza</div><div class="value" style="color: ${rimanenza > 0 ? 'var(--danger)' : 'var(--success)'};">${fmt(rimanenza)}</div></div>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" style="width: ${percentuale}%; ${completato ? 'background: var(--success);' : ''}"></div></div>
+              ${!completato ? `<div style="margin-top: 12px; text-align: center;"><button class="btn success" onclick="openSpesaFromRef('${b.id}','iban')">💸 Inserisci Spesa</button></div>` : ''}
+              <div style="text-align: right; margin-top: 8px;"><button class="btn danger small" onclick="removeBonifico('${b.id}')">🗑️ Elimina</button></div>
+            </div>
+          `;
+        }).join('');
+      }
+      const attivi = state.bonifici.filter(b => b.ratePagate < b.numRate).length;
+      const rateRimanenti = state.bonifici.reduce((s, b) => s + Math.max(0, b.numRate - b.ratePagate), 0);
+      const pagato = state.bonifici.reduce((s, b) => s + (b.ratePagate * b.importoRata), 0);
+      const rimanente = state.bonifici.reduce((s, b) => s + Math.max(0, b.totale - (b.ratePagate * b.importoRata)), 0);
+      document.getElementById('tot-bonifici-attivi').textContent = attivi;
+      document.getElementById('tot-rate-rimanenti').textContent = rateRimanenti;
+      document.getElementById('tot-pagato').textContent = fmt(pagato);
+      document.getElementById('tot-rimanente').textContent = fmt(rimanente);
+    }
+
+    function renderBollettini() {
+      const list = document.getElementById('bollettini-list');
+      if (state.bollettini.length === 0) {
+        list.innerHTML = '<div class="empty-state">Nessun bollettino registrato. Usa la ricerca sopra o clicca "+ Aggiungi Bollettino".</div>';
+      } else {
+        list.innerHTML = state.bollettini.map(b => {
+          const rimanenti = b.numRate - b.ratePagate;
+          const pagato = b.ratePagate * b.importoRata;
+          const rimanenza = b.totale - pagato;
+          const percentuale = (b.ratePagate / b.numRate) * 100;
+          const completato = b.ratePagate >= b.numRate;
+          return `
+            <div class="bollettino-card" style="${completato ? 'background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: var(--success);' : ''}">
+              <h4>${completato ? '✅' : '📄'} ${b.beneficiario} ${completato ? '(COMPLETATO)' : ''}</h4>
+              <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 8px;">
+                <strong>Codice:</strong> ${maskIban(b.codice)} | <strong>Motivazione:</strong> ${b.motivazione}
+              </div>
+              <div class="bonifico-details">
+                <div class="detail-item"><div class="label">Totale</div><div class="value">${fmt(b.totale)}</div></div>
+                <div class="detail-item"><div class="label">Rata</div><div class="value">${fmt(b.importoRata)}</div></div>
+                <div class="detail-item"><div class="label">Pagate</div><div class="value">${b.ratePagate}/${b.numRate}</div></div>
+                <div class="detail-item"><div class="label">Rimanenti</div><div class="value">${rimanenti}</div></div>
+                <div class="detail-item"><div class="label">Pagato</div><div class="value" style="color: var(--success);">${fmt(pagato)}</div></div>
+                <div class="detail-item"><div class="label">Rimanenza</div><div class="value" style="color: ${rimanenza > 0 ? 'var(--danger)' : 'var(--success)'};">${fmt(rimanenza)}</div></div>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" style="width: ${percentuale}%; ${completato ? 'background: var(--success);' : ''}"></div></div>
+              ${!completato ? `<div style="margin-top: 12px; text-align: center;"><button class="btn success" style="background: #7c3aed;" onclick="openSpesaFromRef('${b.id}','bollettino')">💸 Inserisci Spesa</button></div>` : ''}
+              <div style="text-align: right; margin-top: 8px;"><button class="btn danger small" onclick="removeBollettino('${b.id}')">🗑️ Elimina</button></div>
+            </div>
+          `;
+        }).join('');
+      }
+      const attivi = state.bollettini.filter(b => b.ratePagate < b.numRate).length;
+      const rateRimanenti = state.bollettini.reduce((s, b) => s + Math.max(0, b.numRate - b.ratePagate), 0);
+      const pagato = state.bollettini.reduce((s, b) => s + (b.ratePagate * b.importoRata), 0);
+      const rimanente = state.bollettini.reduce((s, b) => s + Math.max(0, b.totale - (b.ratePagate * b.importoRata)), 0);
+      document.getElementById('tot-bollettini-attivi').textContent = attivi;
+      document.getElementById('tot-bol-rate-rimanenti').textContent = rateRimanenti;
+      document.getElementById('tot-bol-pagato').textContent = fmt(pagato);
+      document.getElementById('tot-bol-rimanente').textContent = fmt(rimanente);
+    }
+
+    // ============ ABBONAMENTI ============
     function addAbbonamento() {
-      state.abbonamenti.push({ id: uid(), categoria: 'Abbonamenti', voce: '', importo: '', frequenza: 'Mensile' });
+      state.abbonamenti.push({ id: uid(), categoria: 'Abbonamenti', voce: '', importo: '', frequenza: 'Mensile', data: todayStr(), iban: '', bollettino: '' });
       save(); renderAbbonamenti();
     }
     function removeAbbonamento(id) {
@@ -1269,7 +1923,13 @@
     }
     function updateAbbonamento(id, field, value) {
       const a = state.abbonamenti.find(x => x.id === id);
-      if (a) { a[field] = value; save(); renderAbbonamenti(); }
+      if (a) { 
+        a[field] = value; 
+        save(); 
+        renderAbbonamenti();
+        if (field === 'iban' && value.trim()) checkIbanForBonifico(id, value.trim());
+        if (field === 'bollettino' && value.trim()) checkBollettinoForSpesa(id, value.trim());
+      }
     }
     function renderAbbonamenti() {
       const list = document.getElementById('abbonamenti-list');
@@ -1278,6 +1938,7 @@
       } else {
         list.innerHTML = state.abbonamenti.map(a => `
           <div class="expense-row">
+            <input type="date" value="${a.data || todayStr()}" onchange="updateAbbonamento('${a.id}','data',this.value)" />
             <select onchange="updateAbbonamento('${a.id}','categoria',this.value)">
               ${CATEGORIE.map(c => `<option ${a.categoria===c?'selected':''}>${c}</option>`).join('')}
             </select>
@@ -1286,6 +1947,8 @@
             <select onchange="updateAbbonamento('${a.id}','frequenza',this.value)">
               ${Object.keys(FREQUENZE).map(f => `<option ${a.frequenza===f?'selected':''}>${f}</option>`).join('')}
             </select>
+            <input type="text" placeholder="IBAN" value="${a.iban || ''}" onchange="updateAbbonamento('${a.id}','iban',this.value)" style="font-size: 0.75rem;" />
+            <input type="text" placeholder="Bollettino" value="${a.bollettino || ''}" onchange="updateAbbonamento('${a.id}','bollettino',this.value)" style="font-size: 0.75rem;" />
             <button class="remove-btn" onclick="removeAbbonamento('${a.id}')">×</button>
           </div>
         `).join('');
@@ -1294,6 +1957,7 @@
       document.getElementById('tot-abbonamenti').textContent = fmt(tot);
     }
 
+    // ============ RIEPILOGO ============
     function calcolaRiepilogo() {
       const entrate = state.entrate.reduce((s, e) => s + toMonthly(e.importo, e.frequenza), 0);
       const tutteSpese = [...state.spese, ...state.abbonamenti];
@@ -1390,6 +2054,7 @@
       }
     }
 
+    // ============ DOMANDE ============
     document.querySelectorAll('textarea[data-key]').forEach(ta => {
       ta.addEventListener('input', () => {
         state.domande[ta.dataset.key] = ta.value;
@@ -1402,6 +2067,7 @@
       });
     }
 
+    // ============ AZIONI ============
     function addAzione() {
       state.azioni.push({ id: uid(), azione: '', risparmio: '', entro: '' });
       save(); renderAzioni();
@@ -1432,6 +2098,7 @@
       document.getElementById('tot-azioni').textContent = fmt(tot) + '/mese';
     }
 
+    // ============ CHECKLIST ============
     function renderChecklist() {
       const list = document.getElementById('checklist-list');
       let html = '';
@@ -1467,12 +2134,12 @@
       }
     }
 
+    // ============ CLOUD SAVE/LOAD ============
     async function saveToCloud(silent = false) {
       if (!currentUser) {
         if (!silent) showToast('❌ Non connesso', 'error');
         return;
       }
-      
       try {
         const dataToSave = {
           ...state,
@@ -1492,7 +2159,6 @@
         showToast('❌ Non connesso', 'error');
         return;
       }
-      
       try {
         const doc = await firebaseDb.collection('users').doc(currentUser.uid).get();
         if (doc.exists) {
@@ -1501,6 +2167,8 @@
             entrate: cloudData.entrate || [],
             spese: cloudData.spese || [],
             abbonamenti: cloudData.abbonamenti || [],
+            bonifici: cloudData.bonifici || [],
+            bollettini: cloudData.bollettini || [],
             azioni: cloudData.azioni || [],
             domande: cloudData.domande || {},
             checklist: cloudData.checklist || {}
@@ -1518,7 +2186,7 @@
     }
 
     async function deleteLocalData() {
-      state = { entrate: [], spese: [], abbonamenti: [], azioni: [], domande: {}, checklist: {} };
+      state = { entrate: [], spese: [], abbonamenti: [], bonifici: [], bollettini: [], azioni: [], domande: {}, checklist: {} };
       localStorage.removeItem(STORAGE_KEY);
       hideModal('deleteLocalModal');
       renderAll();
@@ -1531,9 +2199,7 @@
         showToast('❌ Non connesso', 'error');
         return;
       }
-      
       hideModal('deleteCloudModal');
-      
       try {
         await firebaseDb.collection('users').doc(currentUser.uid).delete();
         showToast('✅ Dati cancellati dal cloud', 'success');
@@ -1543,12 +2209,16 @@
       }
     }
 
+    // ============ EXPORT HELPERS ============
     function getExportData(source = 'riepilogo') {
       const periodRadio = source === 'impostazioni'
         ? document.querySelector('input[name="export-period-2"]:checked')
         : document.querySelector('input[name="export-period"]:checked');
       const period = periodRadio ? periodRadio.value : 'mensile';
-      const mult = period === 'annuale' ? 12 : 1;
+      let mult;
+      if (period === 'annuale') mult = 12;
+      else if (period === 'settimanale') mult = 1 / 4.3333;
+      else mult = 1;
       const d = calcolaRiepilogo();
       const today = new Date().toLocaleDateString('it-IT');
       return { period, mult, d, today };
@@ -1570,7 +2240,7 @@
 
     function exportHTML(source = 'riepilogo') {
       const { period, mult, d, today } = getExportData(source);
-      const periodLabel = period === 'annuale' ? 'ANNUALE' : 'MENSILE';
+      const periodLabel = period === 'annuale' ? 'ANNUALE' : period === 'settimanale' ? 'SETTIMANALE' : 'MENSILE';
       let catRows = d.sorted.map(([cat, val]) => {
         const pct = d.entrate > 0 ? (val / d.entrate) * 100 : 0;
         return `<tr><td>${cat}</td><td>${GRUPPI[cat] || 'Desideri'}</td><td style="text-align:right;">${fmt(val * mult)}</td><td style="text-align:right;">${pct.toFixed(1)}%</td></tr>`;
@@ -1595,7 +2265,7 @@
 
     function exportTXT(source = 'riepilogo') {
       const { period, mult, d, today } = getExportData(source);
-      const periodLabel = period === 'annuale' ? 'ANNUALE' : 'MENSILE';
+      const periodLabel = period === 'annuale' ? 'ANNUALE' : period === 'settimanale' ? 'SETTIMANALE' : 'MENSILE';
       const line = '='.repeat(60);
       const dash = '-'.repeat(60);
       let txt = `DOVE FINISCONO I MIEI SOLDI\nRiepilogo ${periodLabel}\n${today}\n${line}\n\n`;
@@ -1616,7 +2286,7 @@
     function exportPDF(source = 'riepilogo') {
       try {
         const { period, mult, d, today } = getExportData(source);
-        const periodLabel = period === 'annuale' ? 'ANNUALE' : 'MENSILE';
+        const periodLabel = period === 'annuale' ? 'ANNUALE' : period === 'settimanale' ? 'SETTIMANALE' : 'MENSILE';
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         doc.setFillColor(30, 58, 138);
@@ -1689,6 +2359,8 @@
             entrate: data.entrate || [],
             spese: data.spese || [],
             abbonamenti: data.abbonamenti || [],
+            bonifici: data.bonifici || [],
+            bollettini: data.bollettini || [],
             azioni: data.azioni || [],
             domande: data.domande || {},
             checklist: data.checklist || {}
@@ -1708,6 +2380,8 @@
       renderEntrate();
       renderSpese();
       renderAbbonamenti();
+      renderBonifici();
+      renderBollettini();
       renderAzioni();
       renderChecklist();
       loadDomande();
