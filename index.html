@@ -665,15 +665,14 @@
     <section id="intro" class="tab active">
       <div class="card">
         <h2>👋 Benvenuto</h2>
-        <p>Questa app ti aiuta a costruire la tua <strong>fotografia finanziaria</strong>: quanto entra, quanto esce e dove finiscono i tuoi soldi.</p>
+        <p>Questa app ti aiuta a costruire la tua <strong>fotografia finanziaria reale</strong>: quanto entra, quanto esce e dove finiscono i tuoi soldi.</p>
         <div class="info-box" style="margin-top: 14px;">
-          <strong>🆕 Novità v2.2:</strong><br>
-          • 🏦 Bonifici con IBAN e rate automatiche<br>
-          • 📄 <strong>Bollettini</strong> con codice e rate automatiche<br>
+          <strong>🆕 Novità v3.1 (Calcolo Reale):</strong><br>
+          • 💰 Il saldo si aggiorna in tempo reale con le cifre esatte inserite (nessuna proiezione futura)<br>
+          • 📅 Esportazione filtrabile per periodo (Giornaliero, Settimanale, Mensile, Annuale)<br>
+          • 🏦 Bonifici e Bollettini con rate automatiche<br>
           • 🔍 Ricerca intelligente per nome, IBAN o codice bollettino<br>
-          • 💸 Inserimento spese direttamente da bonifici e bollettini<br>
-          • 📅 Data di inserimento per ogni entrata e spesa<br>
-          • 📊 Esportazione settimanale, mensile e annuale
+          • 💸 Inserimento spese direttamente da bonifici e bollettini
         </div>
         <div class="btn-row">
           <button class="btn" onclick="switchTab('entrate')">Inizia dalle Entrate →</button>
@@ -684,7 +683,7 @@
     <section id="entrate" class="tab">
       <div class="card">
         <h2>💰 Le tue entrate nette</h2>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Solo importi NETTI. Inserisci la data di ogni entrata.</p>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Inserisci la data e l'importo reale. Il saldo si aggiornerà automaticamente.</p>
         <div class="row header">
           <div>Data</div>
           <div>Voce</div>
@@ -697,11 +696,11 @@
         </div>
         <div class="summary-box" style="margin-top: 16px;">
           <div class="summary-item">
-            <div class="label">Totale entrate mensili</div>
+            <div class="label">Totale Entrate Reali</div>
             <div class="value" id="tot-entrate">€ 0</div>
           </div>
           <div class="summary-item">
-            <div class="label">Totale entrate annuali</div>
+            <div class="label">Saldo Attuale</div>
             <div class="value" id="tot-entrate-annuali">€ 0</div>
           </div>
         </div>
@@ -711,7 +710,7 @@
     <section id="spese" class="tab">
       <div class="card">
         <h2>💸 Le tue spese</h2>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Inserisci data e, se è un bonifico o bollettino, compila i campi. Le rate si scalano automaticamente!</p>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Inserisci l'importo reale. Se è un bonifico o bollettino, compila i campi per scalare le rate automaticamente.</p>
         <div class="expense-row header">
           <div>Data</div>
           <div>Categoria</div>
@@ -728,11 +727,11 @@
         </div>
         <div class="summary-box" style="margin-top: 16px;">
           <div class="summary-item">
-            <div class="label">Totale spese mensili</div>
+            <div class="label">Totale Spese Reali</div>
             <div class="value" id="tot-spese">€ 0</div>
           </div>
           <div class="summary-item">
-            <div class="label">Totale spese annuali</div>
+            <div class="label">Saldo Rimanente</div>
             <div class="value" id="tot-spese-annuali">€ 0</div>
           </div>
         </div>
@@ -759,7 +758,7 @@
         </div>
         <div class="summary-box" style="margin-top: 16px;">
           <div class="summary-item">
-            <div class="label">Totale abbonamenti/mese</div>
+            <div class="label">Totale Abbonamenti Reali</div>
             <div class="value" id="tot-abbonamenti">€ 0</div>
           </div>
         </div>
@@ -772,7 +771,7 @@
         <div class="info-box">
           <strong>💡 Come funziona:</strong><br>
           • Crea un bonifico (IBAN) o bollettino con totale e rate<br>
-          • Quando inserisci una spesa con quell'IBAN/codice, la rata si scala automaticamente<br>
+          • Quando inserisci una spesa con quell'IBAN/codice, la rata si scala automaticamente dall'importo reale<br>
           • 🔍 Usa la ricerca per trovare rapidamente e inserire spese direttamente da qui!
         </div>
 
@@ -847,18 +846,18 @@
 
     <section id="riepilogo" class="tab">
       <div class="card">
-        <h2>📊 La tua fotografia</h2>
+        <h2>📊 La tua fotografia finanziaria reale</h2>
         <div class="summary-box">
           <div class="summary-item">
-            <div class="label">Entrate</div>
+            <div class="label">Entrate Totali</div>
             <div class="value" id="r-entrate">€ 0</div>
           </div>
           <div class="summary-item">
-            <div class="label">Uscite totali</div>
+            <div class="label">Uscite Totali</div>
             <div class="value" id="r-uscite">€ 0</div>
           </div>
           <div class="summary-item">
-            <div class="label">Saldo mensile</div>
+            <div class="label">Saldo Reale</div>
             <div class="value" id="r-saldo">€ 0</div>
           </div>
           <div class="summary-item">
@@ -916,21 +915,28 @@
       <div class="card">
         <h2>📤 Esporta il riepilogo</h2>
         <div class="export-panel">
-          <h3>1. Scegli il periodo</h3>
+          <h3>1. Scegli il periodo di riferimento (etichetta)</h3>
           <div class="radio-group">
             <label>
+              <input type="radio" name="export-period" value="giornaliero" />
+              <span>📅 Giornaliero</span>
+            </label>
+            <label>
               <input type="radio" name="export-period" value="settimanale" />
-              <span>📅 Settimanale</span>
+              <span>📆 Settimanale</span>
             </label>
             <label>
               <input type="radio" name="export-period" value="mensile" checked />
-              <span>📆 Mensile</span>
+              <span>📇 Mensile</span>
             </label>
             <label>
               <input type="radio" name="export-period" value="annuale" />
-              <span>📇 Annuale</span>
+              <span>📈 Annuale</span>
             </label>
           </div>
+          <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 12px;">
+            ⚠️ <strong>Nota:</strong> L'esportazione riporterà sempre le <strong>cifre reali inserite</strong>, senza proiezioni future.
+          </p>
           <h3>2. Scegli il formato</h3>
           <div class="export-buttons">
             <button class="btn accent" onclick="exportHTML()">🌐 HTML</button>
@@ -974,7 +980,7 @@
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">Scegli al massimo tre cambiamenti concreti per il prossimo mese.</p>
         <div class="action-row header" style="display: grid; grid-template-columns: 2fr 1fr 1fr 30px; font-size: 0.75rem; text-transform: uppercase; color: var(--muted); font-weight: 600; padding-bottom: 4px; border-bottom: 1px solid var(--border); margin-bottom: 8px;">
           <div>Azione concreta</div>
-          <div>Risparmio stimato (€/mese)</div>
+          <div>Risparmio stimato (€)</div>
           <div>Entro quando</div>
           <div></div>
         </div>
@@ -1034,18 +1040,25 @@
         <p style="font-size: 0.85rem; margin: 8px 0;">Esporta il riepilogo completo in diversi formati.</p>
         <div class="radio-group">
           <label>
+            <input type="radio" name="export-period-2" value="giornaliero" />
+            <span>📅 Giornaliero</span>
+          </label>
+          <label>
             <input type="radio" name="export-period-2" value="settimanale" />
-            <span>📅 Settimanale</span>
+            <span>📆 Settimanale</span>
           </label>
           <label>
             <input type="radio" name="export-period-2" value="mensile" checked />
-            <span>📆 Mensile</span>
+            <span>📇 Mensile</span>
           </label>
           <label>
             <input type="radio" name="export-period-2" value="annuale" />
-            <span>📇 Annuale</span>
+            <span>📈 Annuale</span>
           </label>
         </div>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 12px;">
+          ⚠️ <strong>Nota:</strong> L'esportazione riporterà sempre le <strong>cifre reali inserite</strong>.
+        </p>
         <div class="export-buttons">
           <button class="btn accent" onclick="exportHTML('impostazioni')">🌐 HTML</button>
           <button class="btn secondary" onclick="exportTXT('impostazioni')">📄 TXT</button>
@@ -1079,14 +1092,14 @@
         <h3 style="margin-top: 24px;">ℹ️ Informazioni</h3>
         <div class="info-box">
           <strong>DOVE FINISCONO I MIEI SOLDI</strong><br>
-          Versione 2.2 (bonifici + bollettini)<br>
+          Versione 3.1 (Calcolo Reale + Bonifici/Bollettini)<br>
           🔐 Sessione automatica: quando chiudi l'app, devi fare nuovamente il login.<br>
           🔑 Recupero password disponibile nella schermata di accesso.<br>
+          💰 Calcolo del saldo in tempo reale basato sugli importi reali inseriti.<br>
           🏦 Gestione bonifici e bollettini con rate automatiche.<br>
           🔍 Ricerca intelligente per nome, IBAN o codice.<br>
           💸 Inserimento spese direttamente da bonifici/bollettini.<br>
-          📅 Data di inserimento per ogni entrata e spesa.<br>
-          📊 Esportazione settimanale, mensile e annuale.<br><br>
+          📅 Data di inserimento per ogni entrata e spesa.<br><br>
           Strumento educativo: non è consulenza finanziaria e non promette guadagni.
         </div>
       </div>
@@ -1141,7 +1154,7 @@
     let isLoginMode = true;
     let lastIbanSpesaId = null;
     let selectedBonificoForSpesa = null;
-    let currentModalType = 'iban'; // 'iban' o 'bollettino'
+    let currentModalType = 'iban';
 
     try {
       firebaseApp = firebase.initializeApp(firebaseConfig);
@@ -1326,7 +1339,7 @@
     }
 
     // ============ STATO ============
-    const STORAGE_KEY = 'doveFinisconoMieiSoldi_v2';
+    const STORAGE_KEY = 'doveFinisconoMieiSoldi_v3';
     let state = {
       entrate: [],
       spese: [],
@@ -1418,9 +1431,7 @@
     function fmt(n) {
       return '€ ' + (Math.round(n * 100) / 100).toLocaleString('it-IT', {minimumFractionDigits: 0, maximumFractionDigits: 2});
     }
-    function toMonthly(amount, freq) {
-      return (parseFloat(amount) || 0) * (FREQUENZE[freq] || 1);
-    }
+    
     function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
     function todayStr() { return new Date().toISOString().split('T')[0]; }
     function maskIban(iban) {
@@ -1498,9 +1509,10 @@
           </div>
         `).join('');
       }
-      const tot = state.entrate.reduce((s, e) => s + toMonthly(e.importo, e.frequenza), 0);
-      document.getElementById('tot-entrate').textContent = fmt(tot);
-      document.getElementById('tot-entrate-annuali').textContent = fmt(tot * 12);
+      const totEntrate = state.entrate.reduce((s, e) => s + (parseFloat(e.importo) || 0), 0);
+      const totSpese = state.spese.reduce((s, e) => s + (parseFloat(e.importo) || 0), 0) + state.abbonamenti.reduce((s, a) => s + (parseFloat(a.importo) || 0), 0);
+      document.getElementById('tot-entrate').textContent = fmt(totEntrate);
+      document.getElementById('tot-entrate-annuali').textContent = fmt(totEntrate - totSpese);
     }
 
     // ============ SPESE ============
@@ -1569,9 +1581,10 @@
           `;
         }).join('');
       }
-      const tot = state.spese.reduce((s, e) => s + toMonthly(e.importo, e.frequenza), 0);
-      document.getElementById('tot-spese').textContent = fmt(tot);
-      document.getElementById('tot-spese-annuali').textContent = fmt(tot * 12);
+      const totSpese = state.spese.reduce((s, e) => s + (parseFloat(e.importo) || 0), 0);
+      const totEntrate = state.entrate.reduce((s, e) => s + (parseFloat(e.importo) || 0), 0);
+      document.getElementById('tot-spese').textContent = fmt(totSpese);
+      document.getElementById('tot-spese-annuali').textContent = fmt(totEntrate - totSpese);
     }
 
     // ============ LOGICA BONIFICI E BOLLETTINI ============
@@ -1953,22 +1966,23 @@
           </div>
         `).join('');
       }
-      const tot = state.abbonamenti.reduce((s, a) => s + toMonthly(a.importo, a.frequenza), 0);
+      const tot = state.abbonamenti.reduce((s, a) => s + (parseFloat(a.importo) || 0), 0);
       document.getElementById('tot-abbonamenti').textContent = fmt(tot);
     }
 
     // ============ RIEPILOGO ============
     function calcolaRiepilogo() {
-      const entrate = state.entrate.reduce((s, e) => s + toMonthly(e.importo, e.frequenza), 0);
+      // CALCOLO REALE: somma semplice degli importi inseriti, senza moltiplicatori di frequenza
+      const entrate = state.entrate.reduce((s, e) => s + (parseFloat(e.importo) || 0), 0);
       const tutteSpese = [...state.spese, ...state.abbonamenti];
-      const uscite = tutteSpese.reduce((s, e) => s + toMonthly(e.importo, e.frequenza), 0);
+      const uscite = tutteSpese.reduce((s, e) => s + (parseFloat(e.importo) || 0), 0);
       const saldo = entrate - uscite;
       const quota = entrate > 0 ? (saldo / entrate) * 100 : 0;
 
       const perCat = {};
       CATEGORIE.forEach(c => perCat[c] = 0);
       tutteSpese.forEach(s => {
-        perCat[s.categoria] = (perCat[s.categoria] || 0) + toMonthly(s.importo, s.frequenza);
+        perCat[s.categoria] = (perCat[s.categoria] || 0) + (parseFloat(s.importo) || 0);
       });
 
       let bisogni = 0, desideri = 0, risparmio = 0;
@@ -2215,10 +2229,8 @@
         ? document.querySelector('input[name="export-period-2"]:checked')
         : document.querySelector('input[name="export-period"]:checked');
       const period = periodRadio ? periodRadio.value : 'mensile';
-      let mult;
-      if (period === 'annuale') mult = 12;
-      else if (period === 'settimanale') mult = 1 / 4.3333;
-      else mult = 1;
+      // Forza il moltiplicatore a 1 per garantire cifre reali, senza proiezioni future
+      const mult = 1; 
       const d = calcolaRiepilogo();
       const today = new Date().toLocaleDateString('it-IT');
       return { period, mult, d, today };
@@ -2240,53 +2252,53 @@
 
     function exportHTML(source = 'riepilogo') {
       const { period, mult, d, today } = getExportData(source);
-      const periodLabel = period === 'annuale' ? 'ANNUALE' : period === 'settimanale' ? 'SETTIMANALE' : 'MENSILE';
+      const periodLabel = period === 'annuale' ? 'ANNUALE' : period === 'settimanale' ? 'SETTIMANALE' : period === 'giornaliero' ? 'GIORNALIERO' : 'MENSILE';
       let catRows = d.sorted.map(([cat, val]) => {
         const pct = d.entrate > 0 ? (val / d.entrate) * 100 : 0;
         return `<tr><td>${cat}</td><td>${GRUPPI[cat] || 'Desideri'}</td><td style="text-align:right;">${fmt(val * mult)}</td><td style="text-align:right;">${pct.toFixed(1)}%</td></tr>`;
       }).join('');
-      const html = `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>Riepilogo - ${periodLabel} - ${today}</title>
+      const html = `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>Riepilogo Reale - ${periodLabel} - ${today}</title>
 <style>body{font-family:-apple-system,sans-serif;max-width:800px;margin:20px auto;padding:20px;color:#1f2937}h1{color:#1e3a8a;border-bottom:3px solid #1e3a8a;padding-bottom:10px}h2{color:#1e3a8a;margin-top:30px}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin:20px 0}.summary-item{background:#eff6ff;padding:15px;border-radius:8px;text-align:center}.summary-item .label{font-size:0.8rem;color:#6b7280;text-transform:uppercase}.summary-item .value{font-size:1.5rem;font-weight:700;color:#1e3a8a;margin-top:5px}.value.positive{color:#10b981}.value.negative{color:#ef4444}table{width:100%;border-collapse:collapse;margin:15px 0}th,td{padding:10px;text-align:left;border-bottom:1px solid #e5e7eb}th{background:#1e3a8a;color:white}tr:nth-child(even){background:#f9fafb}.footer{margin-top:40px;padding-top:20px;border-top:1px solid #e5e7eb;font-size:0.85rem;color:#6b7280;text-align:center}.comparison{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.comp-item{background:white;border:2px solid #e5e7eb;padding:15px;text-align:center;border-radius:8px}.comp-item .group{font-size:0.75rem;color:#6b7280;text-transform:uppercase}.comp-item .current{font-size:1.3rem;font-weight:700;color:#1e3a8a;margin:5px 0}.comp-item .target{font-size:0.8rem;color:#6b7280}</style>
-</head><body><h1>DOVE FINISCONO I MIEI SOLDI</h1><p><strong>Riepilogo ${periodLabel}</strong> — ${today}</p>
+</head><body><h1>DOVE FINISCONO I MIEI SOLDI</h1><p><strong>Riepilogo Reale (${periodLabel})</strong> — ${today}</p>
 <h2>📊 La tua fotografia</h2><div class="summary">
-<div class="summary-item"><div class="label">Entrate</div><div class="value">${fmt(d.entrate * mult)}</div></div>
-<div class="summary-item"><div class="label">Uscite</div><div class="value">${fmt(d.uscite * mult)}</div></div>
-<div class="summary-item"><div class="label">Saldo</div><div class="value ${d.saldo >= 0 ? 'positive' : 'negative'}">${fmt(d.saldo * mult)}</div></div>
+<div class="summary-item"><div class="label">Entrate Reali</div><div class="value">${fmt(d.entrate * mult)}</div></div>
+<div class="summary-item"><div class="label">Uscite Reali</div><div class="value">${fmt(d.uscite * mult)}</div></div>
+<div class="summary-item"><div class="label">Saldo Reale</div><div class="value ${d.saldo >= 0 ? 'positive' : 'negative'}">${fmt(d.saldo * mult)}</div></div>
 <div class="summary-item"><div class="label">Quota che resta</div><div class="value">${d.quota.toFixed(1)}%</div></div></div>
 <h2>🎯 Confronto 50/30/20</h2><div class="comparison">
 <div class="comp-item"><div class="group">Bisogni</div><div class="current">${d.pBisogni.toFixed(1)}%</div><div class="target">target 50%</div></div>
 <div class="comp-item"><div class="group">Desideri</div><div class="current">${d.pDesideri.toFixed(1)}%</div><div class="target">target 30%</div></div>
 <div class="comp-item"><div class="group">Risparmio</div><div class="current">${d.pRisparmio.toFixed(1)}%</div><div class="target">target 20%</div></div></div>
-<h2>📈 Spese per categoria</h2><table><thead><tr><th>Categoria</th><th>Gruppo</th><th style="text-align:right;">Importo</th><th style="text-align:right;">% Entrate</th></tr></thead><tbody>${catRows}</tbody></table>
+<h2>📈 Spese per categoria</h2><table><thead><tr><th>Categoria</th><th>Gruppo</th><th style="text-align:right;">Importo Reale</th><th style="text-align:right;">% Entrate</th></tr></thead><tbody>${catRows}</tbody></table>
 <div class="footer"><p><strong>DOVE FINISCONO I MIEI SOLDI</strong><br>© 2026 Moralex00 - Tutti i diritti riservati</p></div></body></html>`;
-      downloadFile(`riepilogo-${period}-${today.replace(/\//g, '-')}.html`, html, 'text/html');
+      downloadFile(`riepilogo-reale-${period}-${today.replace(/\//g, '-')}.html`, html, 'text/html');
       showToast('✅ File HTML scaricato', 'success');
     }
 
     function exportTXT(source = 'riepilogo') {
       const { period, mult, d, today } = getExportData(source);
-      const periodLabel = period === 'annuale' ? 'ANNUALE' : period === 'settimanale' ? 'SETTIMANALE' : 'MENSILE';
+      const periodLabel = period === 'annuale' ? 'ANNUALE' : period === 'settimanale' ? 'SETTIMANALE' : period === 'giornaliero' ? 'GIORNALIERO' : 'MENSILE';
       const line = '='.repeat(60);
       const dash = '-'.repeat(60);
-      let txt = `DOVE FINISCONO I MIEI SOLDI\nRiepilogo ${periodLabel}\n${today}\n${line}\n\n`;
-      txt += `LA TUA FOTOGRAFIA\n${dash}\n`;
+      let txt = `DOVE FINISCONO I MIEI SOLDI\nRiepilogo Reale (${periodLabel})\n${today}\n${line}\n\n`;
+      txt += `LA TUA FOTOGRAFIA REALE\n${dash}\n`;
       txt += `Entrate:          ${fmt(d.entrate * mult)}\nUscite totali:    ${fmt(d.uscite * mult)}\nSaldo:            ${fmt(d.saldo * mult)}\nQuota che resta:  ${d.quota.toFixed(1)}%\n\n`;
       txt += `CONFRONTO 50/30/20\n${dash}\nBisogni:   ${d.pBisogni.toFixed(1)}%  (target 50%)\nDesideri:  ${d.pDesideri.toFixed(1)}%  (target 30%)\nRisparmio: ${d.pRisparmio.toFixed(1)}%  (target 20%)\n\n`;
       txt += `SPESE PER CATEGORIA\n${dash}\n`;
-      txt += pad('Categoria', 25) + pad('Gruppo', 12) + pad('Importo', 15) + '% Entrate\n' + dash + '\n';
+      txt += pad('Categoria', 25) + pad('Gruppo', 12) + pad('Importo Reale', 15) + '% Entrate\n' + dash + '\n';
       d.sorted.forEach(([cat, val]) => {
         const pct = d.entrate > 0 ? (val / d.entrate) * 100 : 0;
         txt += pad(cat, 25) + pad(GRUPPI[cat] || 'Desideri', 12) + pad(fmt(val * mult), 15) + pct.toFixed(1) + '%\n';
       });
       txt += `\n${line}\n© 2026 Moralex00 - Tutti i diritti riservati\n`;
-      downloadFile(`riepilogo-${period}-${today.replace(/\//g, '-')}.txt`, txt, 'text/plain');
+      downloadFile(`riepilogo-reale-${period}-${today.replace(/\//g, '-')}.txt`, txt, 'text/plain');
       showToast('✅ File TXT scaricato', 'success');
     }
 
     function exportPDF(source = 'riepilogo') {
       try {
         const { period, mult, d, today } = getExportData(source);
-        const periodLabel = period === 'annuale' ? 'ANNUALE' : period === 'settimanale' ? 'SETTIMANALE' : 'MENSILE';
+        const periodLabel = period === 'annuale' ? 'ANNUALE' : period === 'settimanale' ? 'SETTIMANALE' : period === 'giornaliero' ? 'GIORNALIERO' : 'MENSILE';
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         doc.setFillColor(30, 58, 138);
@@ -2295,12 +2307,12 @@
         doc.setFontSize(16); doc.setFont('helvetica', 'bold');
         doc.text('DOVE FINISCONO I MIEI SOLDI', 105, 14, { align: 'center' });
         doc.setFontSize(10); doc.setFont('helvetica', 'normal');
-        doc.text(`Riepilogo ${periodLabel} — ${today}`, 105, 21, { align: 'center' });
+        doc.text(`Riepilogo Reale (${periodLabel}) — ${today}`, 105, 21, { align: 'center' });
         doc.setTextColor(30, 58, 138); doc.setFontSize(13); doc.setFont('helvetica', 'bold');
         doc.text('La tua fotografia', 14, 40);
         doc.autoTable({
           startY: 45,
-          head: [['Voce', 'Importo']],
+          head: [['Voce', 'Importo Reale']],
           body: [['Entrate', fmt(d.entrate * mult)], ['Uscite totali', fmt(d.uscite * mult)], ['Saldo', fmt(d.saldo * mult)], ['Quota che resta', d.quota.toFixed(1) + '%']],
           theme: 'striped', headStyles: { fillColor: [30, 58, 138] }, styles: { fontSize: 10 }
         });
@@ -2321,7 +2333,7 @@
         });
         doc.autoTable({
           startY: y + 5,
-          head: [['Categoria', 'Gruppo', 'Importo', '% Entrate']],
+          head: [['Categoria', 'Gruppo', 'Importo Reale', '% Entrate']],
           body: catBody.length > 0 ? catBody : [['Nessuna spesa', '-', '-', '-']],
           theme: 'striped', headStyles: { fillColor: [30, 58, 138] }, styles: { fontSize: 10 }
         });
@@ -2331,7 +2343,7 @@
           doc.setFontSize(8); doc.setTextColor(107, 114, 128);
           doc.text('© 2026 Moralex00 - Tutti i diritti riservati', 105, 292, { align: 'center' });
         }
-        doc.save(`riepilogo-${period}-${today.replace(/\//g, '-')}.pdf`);
+        doc.save(`riepilogo-reale-${period}-${today.replace(/\//g, '-')}.pdf`);
         showToast('✅ File PDF scaricato', 'success');
       } catch (err) {
         console.error(err);
