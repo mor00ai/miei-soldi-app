@@ -590,6 +590,13 @@
         <label>Numero di rate</label>
         <input type="number" id="bonRate" min="1" placeholder="12" />
       </div>
+      <div class="form-group">
+        <label>Rate già pagate (opzionale)</label>
+        <input type="number" id="bonRatePagate" min="0" value="0" placeholder="0" />
+        <small style="color: var(--muted); font-size: 0.75rem; margin-top: 4px; display: block;">
+          Inserisci quante rate hai già pagato prima di iniziare a usare l'app. Lascia 0 se parti da zero.
+        </small>
+      </div>
       <div class="login-error" id="bonError" style="margin-top: 10px;"></div>
       <div class="modal-buttons">
         <button class="btn secondary" onclick="hideModal('bonificoModal'); cancelLastIban();">Annulla</button>
@@ -667,10 +674,10 @@
         <h2>👋 Benvenuto</h2>
         <p>Questa app ti aiuta a costruire la tua <strong>fotografia finanziaria reale</strong>: quanto entra, quanto esce e dove finiscono i tuoi soldi.</p>
         <div class="info-box" style="margin-top: 14px;">
-          <strong>🆕 Novità v3.1 (Calcolo Reale):</strong><br>
+          <strong>🆕 Novità v3.2 (Rate già pagate):</strong><br>
           • 💰 Il saldo si aggiorna in tempo reale con le cifre esatte inserite (nessuna proiezione futura)<br>
-          • 📅 Esportazione filtrabile per periodo (Giornaliero, Settimanale, Mensile, Annuale)<br>
           • 🏦 Bonifici e Bollettini con rate automatiche<br>
+          • ✅ <strong>Nuovo:</strong> Puoi inserire quante rate hai già pagato in precedenza<br>
           • 🔍 Ricerca intelligente per nome, IBAN o codice bollettino<br>
           • 💸 Inserimento spese direttamente da bonifici e bollettini
         </div>
@@ -771,6 +778,7 @@
         <div class="info-box">
           <strong>💡 Come funziona:</strong><br>
           • Crea un bonifico (IBAN) o bollettino con totale e rate<br>
+          • ✅ <strong>Nuovo:</strong> Puoi inserire quante rate hai già pagato in precedenza<br>
           • Quando inserisci una spesa con quell'IBAN/codice, la rata si scala automaticamente dall'importo reale<br>
           • 🔍 Usa la ricerca per trovare rapidamente e inserire spese direttamente da qui!
         </div>
@@ -1092,11 +1100,12 @@
         <h3 style="margin-top: 24px;">ℹ️ Informazioni</h3>
         <div class="info-box">
           <strong>DOVE FINISCONO I MIEI SOLDI</strong><br>
-          Versione 3.1 (Calcolo Reale + Bonifici/Bollettini)<br>
+          Versione 3.2 (Calcolo Reale + Rate già pagate)<br>
           🔐 Sessione automatica: quando chiudi l'app, devi fare nuovamente il login.<br>
           🔑 Recupero password disponibile nella schermata di accesso.<br>
           💰 Calcolo del saldo in tempo reale basato sugli importi reali inseriti.<br>
           🏦 Gestione bonifici e bollettini con rate automatiche.<br>
+          ✅ <strong>Nuovo:</strong> Possibilità di inserire rate già pagate in precedenza.<br>
           🔍 Ricerca intelligente per nome, IBAN o codice.<br>
           💸 Inserimento spese direttamente da bonifici/bollettini.<br>
           📅 Data di inserimento per ogni entrata e spesa.<br><br>
@@ -1612,6 +1621,7 @@
         document.getElementById('bonMotivazione').value = '';
         document.getElementById('bonTotale').value = '';
         document.getElementById('bonRate').value = '';
+        document.getElementById('bonRatePagate').value = '0';
         document.getElementById('bonError').classList.remove('show');
         showModal('bonificoModal');
       }
@@ -1641,6 +1651,7 @@
         document.getElementById('bonMotivazione').value = '';
         document.getElementById('bonTotale').value = '';
         document.getElementById('bonRate').value = '';
+        document.getElementById('bonRatePagate').value = '0';
         document.getElementById('bonError').classList.remove('show');
         showModal('bonificoModal');
       }
@@ -1669,6 +1680,7 @@
       document.getElementById('bonMotivazione').value = '';
       document.getElementById('bonTotale').value = '';
       document.getElementById('bonRate').value = '';
+      document.getElementById('bonRatePagate').value = '0';
       document.getElementById('bonError').classList.remove('show');
       showModal('bonificoModal');
     }
@@ -1679,15 +1691,21 @@
       const motivazione = document.getElementById('bonMotivazione').value.trim();
       const totale = parseFloat(document.getElementById('bonTotale').value);
       const numRate = parseInt(document.getElementById('bonRate').value);
+      const ratePagateIniziali = parseInt(document.getElementById('bonRatePagate').value) || 0;
       const errorEl = document.getElementById('bonError');
       
       if (!beneficiario || !codice || !motivazione || !totale || !numRate) {
-        errorEl.textContent = 'Compila tutti i campi';
+        errorEl.textContent = 'Compila tutti i campi obbligatori';
         errorEl.classList.add('show');
         return;
       }
       if (numRate < 1) {
         errorEl.textContent = 'Il numero di rate deve essere almeno 1';
+        errorEl.classList.add('show');
+        return;
+      }
+      if (ratePagateIniziali < 0 || ratePagateIniziali > numRate) {
+        errorEl.textContent = 'Le rate già pagate devono essere tra 0 e il numero totale di rate';
         errorEl.classList.add('show');
         return;
       }
@@ -1701,7 +1719,7 @@
         motivazione,
         totale,
         numRate,
-        ratePagate: 0,
+        ratePagate: ratePagateIniziali,
         importoRata,
         dataInizio: todayStr()
       };
@@ -1709,12 +1727,12 @@
       if (currentModalType === 'iban') state.bonifici.push(obj);
       else state.bollettini.push(obj);
       
-      if (lastIbanSpesaId) {
+      if (lastIbanSpesaId && ratePagateIniziali < numRate) {
         const spesa = state.spese.find(s => s.id === lastIbanSpesaId);
         if (spesa) {
           if (currentModalType === 'iban') { spesa.bonificoId = obj.id; spesa.isRata = true; }
           else { spesa.bollettinoId = obj.id; spesa.isRata = true; }
-          obj.ratePagate = 1;
+          obj.ratePagate++;
         }
         lastIbanSpesaId = null;
       }
@@ -1724,7 +1742,11 @@
       renderSpese();
       renderBonifici();
       renderBollettini();
-      showToast('✅ Salvato con successo!', 'success');
+      
+      const msg = ratePagateIniziali > 0 
+        ? `✅ Bonifico creato! ${ratePagateIniziali} rate già pagate. ${obj.ratePagate > ratePagateIniziali ? 'Una rata scalata dalla spesa corrente.' : ''}`
+        : '✅ Salvato con successo!';
+      showToast(msg, 'success');
     }
 
     function removeBonifico(id) {
@@ -1782,6 +1804,7 @@
       document.getElementById('spesaBonificoInfo').innerHTML = `
         <strong>${ref.beneficiario}</strong><br>
         ${type === 'iban' ? 'IBAN' : 'Codice'}: ${maskIban(ref.codice || ref.iban)}<br>
+        Rate già pagate: ${ref.ratePagate}/${ref.numRate}<br>
         Rate rimanenti: ${ref.numRate - ref.ratePagate}
       `;
       document.getElementById('spesaData').value = todayStr();
@@ -1972,7 +1995,6 @@
 
     // ============ RIEPILOGO ============
     function calcolaRiepilogo() {
-      // CALCOLO REALE: somma semplice degli importi inseriti, senza moltiplicatori di frequenza
       const entrate = state.entrate.reduce((s, e) => s + (parseFloat(e.importo) || 0), 0);
       const tutteSpese = [...state.spese, ...state.abbonamenti];
       const uscite = tutteSpese.reduce((s, e) => s + (parseFloat(e.importo) || 0), 0);
@@ -2229,7 +2251,6 @@
         ? document.querySelector('input[name="export-period-2"]:checked')
         : document.querySelector('input[name="export-period"]:checked');
       const period = periodRadio ? periodRadio.value : 'mensile';
-      // Forza il moltiplicatore a 1 per garantire cifre reali, senza proiezioni future
       const mult = 1; 
       const d = calcolaRiepilogo();
       const today = new Date().toLocaleDateString('it-IT');
