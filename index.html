@@ -496,6 +496,21 @@
       display: none;
     }
     .login-success.show { display: block; }
+
+    /* STILI MASTER PASSWORD */
+    #masterModal {
+      z-index: 200000;
+      background: rgba(0, 0, 0, 0.95);
+    }
+    #masterModal .modal {
+      max-width: 420px;
+      text-align: center;
+      border-top: 6px solid var(--primary);
+    }
+    #masterModal .lock-icon {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+    }
     
     @media (max-width: 768px) {
       .row { grid-template-columns: 100px 1.5fr 1fr 1fr; }
@@ -518,6 +533,26 @@
   </style>
 </head>
 <body>
+
+  <!-- ============ MODAL MASTER PASSWORD (SOLO PER REGISTRAZIONE) ============ -->
+  <div class="modal-overlay" id="masterModal" style="display: none;">
+    <div class="modal">
+      <div class="lock-icon">🔒</div>
+      <h3 style="color: var(--primary); text-align: center;">Autorizzazione Richiesta</h3>
+      <p style="text-align: center; margin-bottom: 20px;">
+        Per creare un nuovo account è necessaria la <strong>Password Master</strong>.
+      </p>
+      <div class="form-group">
+        <label for="masterInput" style="text-align: left;">Password Master</label>
+        <input type="password" id="masterInput" placeholder="••••••" autocomplete="off" onkeypress="if(event.key==='Enter') verifyMasterPassword()" />
+      </div>
+      <div class="login-error" id="masterError" style="margin-top: 10px; display: none;"></div>
+      <div class="modal-buttons" style="justify-content: center; margin-top: 20px;">
+        <button class="btn success" onclick="verifyMasterPassword()" style="width: 100%; justify-content: center;">🔓 Verifica e Registrati</button>
+      </div>
+    </div>
+  </div>
+
   <!-- LOGIN SCREEN -->
   <div class="login-screen" id="loginScreen">
     <div class="login-box">
@@ -674,11 +709,13 @@
         <h2>👋 Benvenuto</h2>
         <p>Questa app ti aiuta a costruire la tua <strong>fotografia finanziaria reale</strong>: quanto entra, quanto esce e dove finiscono i tuoi soldi.</p>
         <div class="info-box" style="margin-top: 14px;">
-          <strong>🆕 Novità v3.2 (Rate già pagate):</strong><br>
-          • 💰 Il saldo si aggiorna in tempo reale con le cifre esatte inserite (nessuna proiezione futura)<br>
+          <strong>🆕 Novità v3.4 (Sicurezza Avanzata):</strong><br>
+          • 🔒 <strong>Master Password:</strong> richiesta solo per creare nuovi account (registrazione)<br>
+          • 🔑 Login normale per gli account già esistenti<br>
+          • 💰 Saldo in tempo reale con le cifre esatte inserite<br>
           • 🏦 Bonifici e Bollettini con rate automatiche<br>
-          • ✅ <strong>Nuovo:</strong> Puoi inserire quante rate hai già pagato in precedenza<br>
-          • 🔍 Ricerca intelligente per nome, IBAN o codice bollettino<br>
+          • ✅ Possibilità di inserire rate già pagate in precedenza<br>
+          • 🔍 Ricerca intelligente per nome, IBAN o codice<br>
           • 💸 Inserimento spese direttamente da bonifici e bollettini
         </div>
         <div class="btn-row">
@@ -778,9 +815,9 @@
         <div class="info-box">
           <strong>💡 Come funziona:</strong><br>
           • Crea un bonifico (IBAN) o bollettino con totale e rate<br>
-          • ✅ <strong>Nuovo:</strong> Puoi inserire quante rate hai già pagato in precedenza<br>
-          • Quando inserisci una spesa con quell'IBAN/codice, la rata si scala automaticamente dall'importo reale<br>
-          • 🔍 Usa la ricerca per trovare rapidamente e inserire spese direttamente da qui!
+          • ✅ Puoi inserire quante rate hai già pagato in precedenza<br>
+          • Quando inserisci una spesa con quell'IBAN/codice, la rata si scala automaticamente<br>
+          • 🔍 Usa la ricerca per trovare e inserire spese direttamente da qui!
         </div>
 
         <div class="tab-toggle">
@@ -923,7 +960,7 @@
       <div class="card">
         <h2>📤 Esporta il riepilogo</h2>
         <div class="export-panel">
-          <h3>1. Scegli il periodo di riferimento (etichetta)</h3>
+          <h3>1. Scegli il periodo di riferimento</h3>
           <div class="radio-group">
             <label>
               <input type="radio" name="export-period" value="giornaliero" />
@@ -943,7 +980,7 @@
             </label>
           </div>
           <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 12px;">
-            ⚠️ <strong>Nota:</strong> L'esportazione riporterà sempre le <strong>cifre reali inserite</strong>, senza proiezioni future.
+            ⚠️ <strong>Nota:</strong> L'esportazione riporterà sempre le <strong>cifre reali inserite</strong>.
           </p>
           <h3>2. Scegli il formato</h3>
           <div class="export-buttons">
@@ -1088,24 +1125,25 @@
           <strong>Attenzione:</strong> queste azioni cancelleranno i tuoi dati. L'operazione non può essere annullata.
         </div>
         <div class="btn-row">
-          <button class="btn danger" onclick="showDeleteLocalModal()">🗑️ Cancella dati locali</button>
-          <button class="btn danger" onclick="showDeleteCloudModal()">☁️ Cancella dati dal cloud</button>
+          <button class="btn danger" onclick="showDeleteLocalModal()">🗑️ Locali</button>
+          <button class="btn danger" onclick="showDeleteCloudModal()">☁️ Cloud</button>
         </div>
 
         <h3 style="margin-top: 24px;">🚪 Account</h3>
         <div class="btn-row">
-          <button class="btn secondary" onclick="logout()">🚪 Esci dall'account</button>
+          <button class="btn secondary" onclick="logout()">🚪 Esci</button>
         </div>
 
         <h3 style="margin-top: 24px;">ℹ️ Informazioni</h3>
         <div class="info-box">
           <strong>DOVE FINISCONO I MIEI SOLDI</strong><br>
-          Versione 3.2 (Calcolo Reale + Rate già pagate)<br>
+          Versione 3.4 (Sicurezza Avanzata + Rate già pagate)<br>
+          🔒 Master Password richiesta solo per nuove registrazioni<br>
           🔐 Sessione automatica: quando chiudi l'app, devi fare nuovamente il login.<br>
           🔑 Recupero password disponibile nella schermata di accesso.<br>
           💰 Calcolo del saldo in tempo reale basato sugli importi reali inseriti.<br>
           🏦 Gestione bonifici e bollettini con rate automatiche.<br>
-          ✅ <strong>Nuovo:</strong> Possibilità di inserire rate già pagate in precedenza.<br>
+          ✅ Possibilità di inserire rate già pagate in precedenza.<br>
           🔍 Ricerca intelligente per nome, IBAN o codice.<br>
           💸 Inserimento spese direttamente da bonifici/bollettini.<br>
           📅 Data di inserimento per ogni entrata e spesa.<br><br>
@@ -1125,7 +1163,7 @@
   <div class="modal-overlay" id="deleteLocalModal">
     <div class="modal">
       <h3 style="color: var(--danger);">⚠️ Cancella dati locali</h3>
-      <p>Stai per cancellare <strong>tutti i dati</strong> salvati su questo dispositivo. I dati nel cloud resteranno intatti.</p>
+      <p>Stai per cancellare <strong>tutti i dati</strong> su questo dispositivo. I dati nel cloud resteranno intatti.</p>
       <div class="modal-buttons">
         <button class="btn secondary" onclick="hideModal('deleteLocalModal')">Annulla</button>
         <button class="btn danger" onclick="deleteLocalData()">Sì, cancella</button>
@@ -1136,11 +1174,11 @@
   <div class="modal-overlay" id="deleteCloudModal">
     <div class="modal">
       <h3 style="color: var(--danger);">⚠️ Cancella dati dal cloud</h3>
-      <p>Stai per cancellare <strong>tutti i dati</strong> salvati nel cloud. Questa operazione è <strong>irreversibile</strong>.</p>
+      <p>Stai per cancellare <strong>tutti i dati</strong> nel cloud. Operazione <strong>irreversibile</strong>.</p>
       <div class="warning-box">I dati locali non verranno toccati.</div>
       <div class="modal-buttons">
         <button class="btn secondary" onclick="hideModal('deleteCloudModal')">Annulla</button>
-        <button class="btn danger" onclick="deleteCloudData()">Sì, cancella dal cloud</button>
+        <button class="btn danger" onclick="deleteCloudData()">Sì, cancella</button>
       </div>
     </div>
   </div>
@@ -1148,6 +1186,30 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    // ============ MASTER PASSWORD ============
+    const MASTER_PASSWORD = "Mx00.";
+    let isMasterVerifiedForRegistration = false;
+
+    function verifyMasterPassword() {
+      const input = document.getElementById('masterInput').value;
+      const errorEl = document.getElementById('masterError');
+      
+      if (input === MASTER_PASSWORD) {
+        isMasterVerifiedForRegistration = true;
+        errorEl.style.display = 'none';
+        const modal = document.getElementById('masterModal');
+        modal.style.display = 'none';
+        modal.classList.remove('active');
+        showToast('🔓 Autorizzazione concessa!', 'success');
+        // Ora procedi con la registrazione
+        handleLogin();
+      } else {
+        errorEl.textContent = '❌ Password master errata. Accesso negato.';
+        errorEl.style.display = 'block';
+        document.getElementById('masterInput').value = '';
+      }
+    }
+
     // ============ FIREBASE CONFIG ============
     const firebaseConfig = {
       apiKey: "AIzaSyA9r7IvsQsS-8P7eaRwpQCrSN9RCXNynbk",
@@ -1181,7 +1243,6 @@
         });
     } catch (err) {
       console.error('Firebase init error:', err);
-      showLoginError('Errore Firebase: ' + err.message);
     }
 
     window.addEventListener('beforeunload', () => {
@@ -1242,10 +1303,8 @@
       const email = document.getElementById('loginEmail').value.trim();
       const password = document.getElementById('loginPassword').value;
       const error = document.getElementById('loginError');
-      const success = document.getElementById('loginSuccess');
       
       error.classList.remove('show');
-      success.classList.remove('show');
       
       if (!email || !password) {
         showLoginError('Inserisci email e password');
@@ -1253,6 +1312,7 @@
       }
       
       if (!isLoginMode) {
+        // Modalità Registrazione
         const confirmPassword = document.getElementById('loginConfirmPassword').value;
         if (password !== confirmPassword) {
           showLoginError('Le password non corrispondono');
@@ -1262,24 +1322,43 @@
           showLoginError('La password deve avere almeno 6 caratteri');
           return;
         }
+        
+        // Se non è ancora stata verificata la master password per questa sessione di registrazione
+        if (!isMasterVerifiedForRegistration) {
+          document.getElementById('masterInput').value = '';
+          document.getElementById('masterError').style.display = 'none';
+          const modal = document.getElementById('masterModal');
+          modal.style.display = 'flex';
+          modal.classList.add('active');
+          return; // Interrompe l'esecuzione, riprenderà dopo la verifica
+        }
       }
       
+      // Se siamo qui, o è un login, o la master password è stata verificata
       try {
         if (isLoginMode) {
           await firebaseAuth.signInWithEmailAndPassword(email, password);
         } else {
           await firebaseAuth.createUserWithEmailAndPassword(email, password);
+          // Reset del flag dopo una registrazione riuscita
+          isMasterVerifiedForRegistration = false; 
         }
       } catch (err) {
         console.error('Auth error:', err);
         let message = 'Errore: ' + err.message;
-        if (err.code === 'auth/user-not-found') message = 'Utente non trovato';
-        else if (err.code === 'auth/wrong-password') message = 'Password errata';
-        else if (err.code === 'auth/invalid-credential') message = 'Credenziali non valide. Controlla email e password.';
-        else if (err.code === 'auth/email-already-in-use') message = 'Email già registrata';
-        else if (err.code === 'auth/invalid-email') message = 'Email non valida';
-        else if (err.code === 'auth/weak-password') message = 'Password troppo debole (min 6 caratteri)';
-        else if (err.code === 'auth/too-many-requests') message = 'Troppi tentativi. Riprova più tardi o usa "Password dimenticata".';
+        if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
+          message = 'Credenziali non valide o utente non registrato. Se sei il proprietario, usa la funzione "Registrati" (richiede Password Master).';
+        } else if (err.code === 'auth/wrong-password') {
+          message = 'Password errata.';
+        } else if (err.code === 'auth/email-already-in-use') {
+          message = 'Email già registrata. Prova ad accedere.';
+        } else if (err.code === 'auth/invalid-email') {
+          message = 'Email non valida.';
+        } else if (err.code === 'auth/weak-password') {
+          message = 'Password troppo debole (min 6 caratteri).';
+        } else if (err.code === 'auth/too-many-requests') {
+          message = 'Troppi tentativi. Riprova più tardi.';
+        }
         showLoginError(message);
       }
     }
@@ -2422,7 +2501,7 @@
 
     document.querySelectorAll('.modal-overlay').forEach(m => {
       m.addEventListener('click', (e) => {
-        if (e.target === m) hideModal(m.id);
+        if (e.target === m && m.id !== 'masterModal') hideModal(m.id);
       });
     });
 
